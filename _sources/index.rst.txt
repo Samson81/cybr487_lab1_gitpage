@@ -1,0 +1,22 @@
+.. CYBR 487 Network Tools documentation master file, created by
+   sphinx-quickstart on Wed Jan 14 21:13:24 2026.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+.. CYBR487 Lab1 documentation master file, created by
+   sphinx-quickstart on Wed Jan 14 19:50:49 2026.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+CYBR 487 Network Tools Documentation
+====================================
+
+This is the documentation for the project CYBR 487 Network Tools by (Best) group 1. The code can be found `here <https://github.com/Samson81/cybr487_lab1/>`__.
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   getting_started
+   modules

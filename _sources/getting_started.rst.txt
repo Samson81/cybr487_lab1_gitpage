@@ -1,0 +1,47 @@
+Getting Started
+===============
+
+=================
+Setup and Running
+=================
+
+--------------------------
+1 - Cloning the Repository
+--------------------------
+
+#. Make sure git and python 3 are installed on your computer  
+
+#. In a new terminal, run the command:
+
+    - ``git clone https://github.com/Samson81/cybr487_lab1.git``
+
+#. Run the command to move into the repository's directory:
+
+    - ``cd cybr487_lab1``
+
+---------------------------------------------------
+2 - Setting up Virtual Environment and Requirements
+---------------------------------------------------
+
+Run the following in the same terminal/directory:  
+
+#. ``python3 -m venv venv``
+
+#. ``source venv/bin/activate``
+
+#. ``pip install -r requirements.txt``
+
+----------------------------
+3 - Running Network Analyzer
+----------------------------
+
+Run the following in the cyber487\_lab1 directory
+
+1. ``sudo python3 analyzer.py -i <ip_address>``
+
+The IP addresses that responded will display below
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
