@@ -1,4 +1,4 @@
-analyzer module
+analyzer.py
 ===============
 
 .. automodule:: analyzer
