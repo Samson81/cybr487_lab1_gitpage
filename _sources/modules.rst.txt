@@ -3,6 +3,7 @@ Code Documentation
 
 .. toctree::
    :maxdepth: 4
+   :caption: Documentation:
 
    analyzer
    ip_parser

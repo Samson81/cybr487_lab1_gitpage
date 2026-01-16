@@ -44,4 +44,6 @@ The IP addresses that responded will display below
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Documentation:
+
+   modules

@@ -1,4 +1,4 @@
-scan.plugins package
+Plugins
 ====================
 
 Submodules
