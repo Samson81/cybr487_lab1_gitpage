@@ -39,13 +39,21 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Setup:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Setup</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">How To Use</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../help/scanning.html">Kinds of Scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/index.html">Code Documentation</a></li>
 </ul>
 
         </div>
@@ -87,7 +95,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">ipaddress</span>
 
 <div class="viewcode-block" id="Scan">
-<a class="viewcode-back" href="../../scan.html#scan.ip_range_scan.Scan">[docs]</a>
+<a class="viewcode-back" href="../../modules/scan.html#scan.ip_range_scan.Scan">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Scan</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">ip_range</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
@@ -130,9 +138,9 @@
 
 
 <div class="viewcode-block" id="Scan.scan">
-<a class="viewcode-back" href="../../scan.html#scan.ip_range_scan.Scan.scan">[docs]</a>
+<a class="viewcode-back" href="../../modules/scan.html#scan.ip_range_scan.Scan.scan">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calls the chosen scan types scan function with the IP range</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calls the chosen scan types scan function with</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            list[str]: The list of IP addresses that responded, sorted</span>

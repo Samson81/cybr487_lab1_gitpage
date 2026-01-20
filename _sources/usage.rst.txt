@@ -1,0 +1,77 @@
+How To Use
+==========
+
+This page contains information on how to use the program. 
+
+Network Scan
+------------
+
+To see the help for the program, type ``python3 analyzer.py`` inside of the :ref:`virtual environment <virt-env>`.
+.. literalinclude::
+
+    usage: analyzer.py -i [IP] [options]
+
+    options:
+    -h, --help            show this help message and exit
+    -i, --ip IP           The IP range to scan
+    -s, --scan SCAN       The type of scan to perform. Default "arp"
+    -t, --timeout TIMEOUT The time in seconds to wait for a packet. Default 2 seconds
+
+^^^^^^^^
+\-\-help
+^^^^^^^^
+Displays the help message shown above.
+
+^^^^^^
+\-\-ip
+^^^^^^
+.. attention::
+    This flag is required. You will get the help option if it is not included.
+
+The range to scan. There are several inputs that can be accepted. Below is an table of Examples for what each passed in value converts to:
+
++-----------------+--------------------+
+| Passed In       | Converted To       |
++=================+====================+
+| 192             | 192.0.0.0/8        |
++-----------------+--------------------+
+| 192.168         | 192.168.0.0/16     |
++-----------------+--------------------+
+| 192.168.1       | 192.168.1.0/24     | 
++-----------------+--------------------+
+| 192.168.1.1     | 192.168.1.1/32     |
++-----------------+--------------------+
+| 192.168.1.1/8   | 192.0.0.0/8        |
++-----------------+--------------------+
+| 192.168.1.1/16  | 192.168.0.0/16     |
++-----------------+--------------------+
+| 192.168.1.1/24  | 192.168.1.0/24     |
++-----------------+--------------------+
+| 192.168.1.1/32  | 192.168.1.1/32     |
++-----------------+--------------------+
+
+Note that numbers other than 8, 16, 24, or 32 are allowed for the full CIDR notation.
+
+^^^^^^^^
+\-\-scan
+^^^^^^^^
+The type of scan to run. Upon cloning the repository the following strings are accepted:
+
+- arp
+- icmp
+- tcp
+
+More details for each scan type can be found at :ref:`How To Scan <scanning>`.
+
+.. note::
+    This flag is not required. If it is not provided, an arp scan is run.
+
+    If an invalid value is passed in, the program will default to an arp scan.
+
+^^^^^^^^^^^
+\-\-timeout
+^^^^^^^^^^^
+This flag indicates the timeout time for each packet that is sent. The value passed in must be in seconds, and must be an integer value.
+
+.. note::
+    This flag is not required. The default timeout is 2 seconds.

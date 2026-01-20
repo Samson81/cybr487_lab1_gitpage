@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Overview: module code &mdash; CYBR487 Lab1 1.0 documentation</title>
+  <title>ip_parser.py &mdash; CYBR487 Lab1 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
@@ -17,7 +18,9 @@
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="scan package" href="scan.html" />
+    <link rel="prev" title="analyzer.py" href="analyzer.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,8 +55,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../help/scanning.html">Kinds of Scans</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Code Documentation</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Code Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer.py</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ip_parser.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ip_parser.normalize_cidr"><code class="docutils literal notranslate"><span class="pre">normalize_cidr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scan.html">scan package</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -70,8 +81,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Overview: module code</li>
+          <li class="breadcrumb-item"><a href="index.html">Code Documentation</a></li>
+      <li class="breadcrumb-item active">ip_parser.py</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/ip_parser.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,18 +92,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>All modules for which code is available</h1>
-<ul><li><a href="analyzer.html">analyzer</a></li>
-<li><a href="ip_parser.html">ip_parser</a></li>
-<li><a href="scan/ip_range_scan.html">scan.ip_range_scan</a></li>
-<li><a href="scan/plugins/arp.html">scan.plugins.arp</a></li>
-<li><a href="scan/plugins/icmp.html">scan.plugins.icmp</a></li>
-<li><a href="scan/plugins/tcp.html">scan.plugins.tcp</a></li>
-</ul>
+  <section id="module-ip_parser">
+<span id="ip-parser-py"></span><h1>ip_parser.py<a class="headerlink" href="#module-ip_parser" title="Link to this heading"></a></h1>
+<p>Function for normalizing IP addresses to CIDR notation</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ip_parser.normalize_cidr">
+<span class="sig-prename descclassname"><span class="pre">ip_parser.</span></span><span class="sig-name descname"><span class="pre">normalize_cidr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip_input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/ip_parser.html#normalize_cidr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ip_parser.normalize_cidr" title="Link to this definition"></a></dt>
+<dd><p>Takes an IP address, range of IP addresses, or partial IP address
+and normalizes it to CIDR notation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ip_input</strong> (<em>str</em>) – A string representing an IPv4 address range</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A string representing the IP range in CIDR notation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="analyzer.html" class="btn btn-neutral float-left" title="analyzer.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scan.html" class="btn btn-neutral float-right" title="scan package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
