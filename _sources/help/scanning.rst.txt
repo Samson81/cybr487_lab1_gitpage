@@ -1,0 +1,63 @@
+.. _scanning:
+
+Kinds of Scans
+==============
+
+--------
+ARP Scan
+--------
+
+.. note::
+    While this scan is the fastest, it has a downside compared to the other two, which is that it only works on the current subnet. This means you cannot scan a remote subnet, or machines behind a router in your subnet will not be scanned.
+
+    Also the request and response below are not what the packets actually say, but it is what you would see in a packet capture when running it.
+
+An ARP scan, or Address Resolution Protocol, is the simplest and fastest way of finding machines on a subnet. The way it works is the following:
+
+1. Your machine sends out a packet to the broadcast ethernet address saying:
+
+::
+
+    Who has x.x.x.x? Tell y.y.y.y
+
+where x.x.x.x is the machine you are scanning, and y.y.y.y is your machine.
+
+2. If the machine is up, it will respond with:
+
+::
+
+    x.x.x.x is at zz:zz:zz:zz:zz:zz
+
+where zz:zz:zz:zz:zz:zz is the MAC address of x.x.x.x. 
+
+
+---------
+ICMP Scan
+---------
+.. note::
+    By default, Windows Defender Firewall blocks ICMP Echo Request and Reply packets, and will not show up on this kind of scan.
+
+    Can be slow if the MAC address for multiple machines cannot be found and are not cached.
+
+An ICMP scan, or Internet Control Message Protocol, is the second most simple and fastest scan. The benefit over ARP is that it allows scanning of remote machines and subnets behind routers [#f1]_.
+
+The way it works:
+
+- Your computer sends out an ICMP Echo Request to the machine you want to scan.
+- If the target is online and allows Echo Requests, it responds with an ICMP Echo Reply
+
+.. [#f1] Assuming the router allows external ICMP Echo Requests
+
+
+--------
+TCP Scan
+--------
+.. note::
+    This scan like ICMP can be slow if the MAC address for multiple machines cannot be found and are not cached.
+
+A TCP scan, or Transmission Control Protocol, is possibly slower than ICMP and ARP, but is more reliable compared to ICMP, since Windows can respond by default. It works by:
+
+- Sending a TCP SYN packet to port 80 on the machine.
+- If the machine is up, it should responds with either a TCP SYN/ACK packet, or an ICMP Destination Unreachable packet if the port is closed [#f2]_.
+
+.. [#f2] Responses are based on whether or not the target ignores packets sent to closed ports.

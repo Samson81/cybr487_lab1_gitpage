@@ -19,6 +19,8 @@ Setup and Running
 
     - ``cd cybr487_lab1``
 
+.. _virt-env:
+
 ---------------------------------------------------
 2 - Setting up Virtual Environment and Requirements
 ---------------------------------------------------
@@ -40,10 +42,3 @@ Run the following in the cyber487\_lab1 directory
 1. ``sudo python3 analyzer.py -i <ip_address>``
 
 The IP addresses that responded will display below
-
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Documentation:
-
-   modules

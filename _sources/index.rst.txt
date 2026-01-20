@@ -6,18 +6,32 @@
 CYBR 487 Network Tools Documentation
 ====================================
 
-This is the documentation for the project CYBR 487 Network Tools by (Best) group 1. The code can be found `here <https://github.com/Samson81/cybr487_lab1/>`__.
+This is the documentation for the project CYBR 487 Network Tools by Group Alpha. The code can be found `here <https://github.com/Samson81/cybr487_lab1/>`__. 
+
+Link to the style guide that we used found `here <https://google.github.io/styleguide/pyguide.html>`__.
 
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Setup:
+   :maxdepth: 3
+   :caption: Setup
 
    getting_started
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Documentation:
+   :maxdepth: 3
+   :caption: Usage
 
-   modules
+   usage
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Help
+
+   help/scanning.rst
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Documentation
+
+   modules/index.rst
 

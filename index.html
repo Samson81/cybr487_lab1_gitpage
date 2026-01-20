@@ -41,13 +41,21 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Setup:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Setup</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">How To Use</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="help/scanning.html">Kinds of Scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/index.html">Code Documentation</a></li>
 </ul>
 
         </div>
@@ -76,23 +84,68 @@
              
   <section id="cybr-487-network-tools-documentation">
 <h1>CYBR 487 Network Tools Documentation<a class="headerlink" href="#cybr-487-network-tools-documentation" title="Link to this heading"></a></h1>
-<p>This is the documentation for the project CYBR 487 Network Tools by (Best) group 1. The code can be found <a class="reference external" href="https://github.com/Samson81/cybr487_lab1/">here</a>.</p>
+<p>This is the documentation for the project CYBR 487 Network Tools by Group Alpha. The code can be found <a class="reference external" href="https://github.com/Samson81/cybr487_lab1/">here</a>.</p>
+<p>Link to the style guide that we used found <a class="reference external" href="https://google.github.io/styleguide/pyguide.html">here</a>.</p>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Setup:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Setup</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#setup-and-running">Setup and Running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#setup-and-running">Setup and Running</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#cloning-the-repository">1 - Cloning the Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#setting-up-virtual-environment-and-requirements">2 - Setting up Virtual Environment and Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#running-network-analyzer">3 - Running Network Analyzer</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">Code Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scan.html">scan package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">How To Use</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#network-scan">Network Scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#help">--help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#ip">--ip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#scan">--scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#timeout">--timeout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="help/scanning.html">Kinds of Scans</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="help/scanning.html#arp-scan">ARP Scan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="help/scanning.html#icmp-scan">ICMP Scan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="help/scanning.html#tcp-scan">TCP Scan</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/index.html">Code Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/analyzer.html">analyzer.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/analyzer.html#analyzer.analyze"><code class="docutils literal notranslate"><span class="pre">analyze()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/analyzer.html#analyzer.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/ip_parser.html">ip_parser.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/ip_parser.html#ip_parser.normalize_cidr"><code class="docutils literal notranslate"><span class="pre">normalize_cidr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/scan.html">scan package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/scan.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/scan.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/scan.html#module-scan.ip_range_scan">scan.ip_range_scan module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/scan.html#module-scan">Module contents</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
