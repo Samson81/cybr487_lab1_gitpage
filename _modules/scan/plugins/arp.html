@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>scan.plugins.arp &mdash; CYBR487 Lab1 1.0 documentation</title>
+  <title>scan.plugins.arp &mdash; CYBR487 Lab1 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../../_static/documentation_options.js?v=60dbed4a"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -84,8 +84,10 @@
 <span></span><span class="sd">&quot;&quot;&quot;Function for scanning IP ranges with ARP packets</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">scapy.all</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ether</span><span class="p">,</span> <span class="n">ARP</span><span class="p">,</span> <span class="n">srp</span><span class="p">,</span> <span class="n">conf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scapy.all</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
+<span class="c1"># The string to put into the program to call this</span>
 <span class="n">SCAN_TYPE</span> <span class="o">=</span> <span class="s2">&quot;arp&quot;</span>
 
 <div class="viewcode-block" id="scan">
@@ -93,6 +95,8 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span><span class="n">ip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
          <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs an ARP packet scan on the provided IP range.</span>
+
+<span class="sd">    Sends an ARP &quot;Who is at x.x.x.x? Tell y.y.y.y&quot; packet to each IP address.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        ip (str | list[str]): A string or list that contain the IP addresses to check</span>
@@ -102,6 +106,7 @@
 <span class="sd">        str: A list of the IP addresses that responded</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">verb</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;scapy.runtime&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
 
     <span class="n">eth_packet</span> <span class="o">=</span> <span class="n">Ether</span><span class="p">()</span>
     <span class="n">arp_packet</span> <span class="o">=</span> <span class="n">ARP</span><span class="p">()</span>
@@ -112,7 +117,7 @@
 
     <span class="n">packet</span> <span class="o">=</span> <span class="n">eth_packet</span><span class="o">/</span><span class="n">arp_packet</span>
 
-    <span class="n">ans</span><span class="p">,</span> <span class="n">unans</span> <span class="o">=</span> <span class="n">srp</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ans</span><span class="p">,</span> <span class="n">unans</span> <span class="o">=</span> <span class="n">srp</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">seen_ips</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">pack</span> <span class="ow">in</span> <span class="n">ans</span><span class="p">:</span>

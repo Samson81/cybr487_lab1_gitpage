@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>analyzer &mdash; CYBR487 Lab1 1.0 documentation</title>
+  <title>analyzer &mdash; CYBR487 Lab1 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../_static/documentation_options.js?v=60dbed4a"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -88,47 +88,9 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scan.ip_range_scan</span><span class="w"> </span><span class="kn">import</span> <span class="n">Scan</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">ip_parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">normalize_cidr</span>
-
-<div class="viewcode-block" id="analyze">
-<a class="viewcode-back" href="../modules/analyzer.html#analyzer.analyze">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">analyze</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The function to analyze the given network</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        args (argparse.Namespace): The command-line arguments passed into main</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If the passed in IP address range is not valid</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">term_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_terminal_size</span><span class="p">()</span><span class="o">.</span><span class="n">columns</span>
-    <span class="n">cols</span> <span class="o">=</span> <span class="n">term_size</span> <span class="o">//</span> <span class="mi">17</span> <span class="o">-</span> <span class="mi">2</span>
-
-    <span class="n">normalized</span> <span class="o">=</span> <span class="n">normalize_cidr</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">ip</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">normalized</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">ip</span><span class="si">}</span><span class="s2"> is not a valid IPv4 range&quot;</span><span class="p">)</span>
-
-    <span class="n">scan_type</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">scan</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">scan</span> <span class="k">else</span> <span class="s2">&quot;arp&quot;</span>
-    <span class="n">timeout</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">timeout</span> <span class="k">else</span> <span class="mi">2</span>
-
-    <span class="n">scanner</span> <span class="o">=</span> <span class="n">Scan</span><span class="p">(</span><span class="n">normalized</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">scan_type</span><span class="o">=</span><span class="n">scan_type</span><span class="p">)</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="n">scan</span><span class="p">()</span>
-
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">%</span> <span class="n">cols</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="c1"># Padding out for the final line</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IP Addresses That Responded:&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;+-----------------&quot;</span> <span class="o">*</span> <span class="n">cols</span> <span class="o">+</span> <span class="s2">&quot;+&quot;</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">//</span> <span class="n">cols</span><span class="p">):</span>
-        <span class="c1"># Creates the rows of IP addresses</span>
-        <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">cols</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">cols</span> <span class="o">+</span> <span class="n">cols</span><span class="p">)]</span>
-
-        <span class="c1"># Dislays the rows in a nice table</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| &quot;</span> <span class="o">+</span> <span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">j</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">row</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; |&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;+-----------------&quot;</span> <span class="o">*</span> <span class="n">cols</span> <span class="o">+</span> <span class="s2">&quot;+&quot;</span><span class="p">)</span></div>
-
+<span class="kn">from</span><span class="w"> </span><span class="nn">netscan</span><span class="w"> </span><span class="kn">import</span> <span class="n">scan_network</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">selfscan</span><span class="w"> </span><span class="kn">import</span> <span class="n">scan_self</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">report</span><span class="w"> </span><span class="kn">import</span> <span class="n">netscan_report</span><span class="p">,</span> <span class="n">selfscan_report</span>
 
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../modules/analyzer.html#analyzer.main">[docs]</a>
@@ -139,20 +101,32 @@
 <span class="sd">        args (argparse.Namespace): The command-line arguments passed into main</span>
 <span class="sd">        parse (argparse.ArgumentParser): The command-line argument parser</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">selfscan</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+    
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">analyze</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span></div>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">scan_network</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">netscan_report</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">protocol</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">traceroute</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">selfscan</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">scan_self</span><span class="p">()</span>
+        <span class="n">selfscan_report</span><span class="p">(</span><span class="n">results</span><span class="p">)</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="c1">#parse args</span>
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">usage</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(prog)s</span><span class="s1"> -i [IP] [options]&#39;</span><span class="p">)</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">usage</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(prog)s</span><span class="s1"> [options]&#39;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;--ip&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The IP range to scan&quot;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--scan&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;The type of scan to perform. Default &quot;arp&quot;&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--protocol&#39;</span><span class="p">,</span>
+    		<span class="n">help</span><span class="o">=</span><span class="s1">&#39;The type of scan to perform. Default &quot;arp&quot;&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--selfscan&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+    		<span class="n">help</span><span class="o">=</span><span class="s2">&quot;Scans the user&#39;s /proc system&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;--timeout&#39;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;The time in seconds to wait for a packet. Default 2 seconds&#39;</span><span class="p">)</span>
-
+    		<span class="n">help</span><span class="o">=</span><span class="s1">&#39;The time in seconds to wait for a packet. Default 2 seconds&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-tr&#39;</span><span class="p">,</span> <span class="s1">&#39;--traceroute&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;icmp&#39;</span><span class="p">,</span> <span class="s1">&#39;tcp&#39;</span><span class="p">],</span>
+			<span class="n">help</span><span class="o">=</span><span class="s1">&#39;Perform traceroute on discovered hosts. Options: icmp, tcp&#39;</span><span class="p">)</span>
+                    
     <span class="c1">#send args to main</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
     <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>

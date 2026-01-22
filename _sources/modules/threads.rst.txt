@@ -1,0 +1,21 @@
+threads package
+===============
+
+Submodules
+----------
+
+threads.CustomThread module
+---------------------------
+
+.. automodule:: threads.CustomThread
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: threads
+   :members:
+   :show-inheritance:
+   :undoc-members:

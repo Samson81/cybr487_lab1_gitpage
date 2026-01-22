@@ -1,7 +1,7 @@
-analyzer module
+selfscan module
 ===============
 
-.. automodule:: analyzer
+.. automodule:: selfscan
    :members:
    :show-inheritance:
    :undoc-members:

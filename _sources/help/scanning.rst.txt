@@ -61,3 +61,37 @@ A TCP scan, or Transmission Control Protocol, is possibly slower than ICMP and A
 - If the machine is up, it should responds with either a TCP SYN/ACK packet, or an ICMP Destination Unreachable packet if the port is closed [#f2]_.
 
 .. [#f2] Responses are based on whether or not the target ignores packets sent to closed ports.
+
+
+---------
+NMAP Scan
+---------
+
+.. note::
+    This is based on the default scan that nmap uses with no arguments.
+
+The Nmap scan is a special scan. Rather than using one type of packet it uses multiple. These are:
+
+- ARP
+    - Type: "who has"
+- ICMP
+    - Type: (8) Echo Request
+- ICMP
+    - Type: (13) Timestamp
+- TCP
+    - Flags: ACK
+    - Port: 80
+- TCP
+    - Flags: SYN
+    - Port: 443
+
+If a response is recieved from any one of these packets, the computer is marked as alive/found.
+
+
+.. _tracert:
+
+==========
+Traceroute
+==========
+
+Traceroutes work by sending packets with an incrementing Time-To-Live (TTL). If a TTL drops to zero, the hop (router) that decremented it will send back an ICMP TTL Exceeded packet. When you recieve back an ICMP Echo or TCP SYN/ACK you know you have reached a minimum amount of hops to that machine, and using the ICMP TTL Exceeded packets, you can build the path it took.

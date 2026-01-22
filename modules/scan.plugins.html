@@ -6,19 +6,20 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plugins &mdash; CYBR487 Lab1 1.0 documentation</title>
+  <title>scan.plugins package &mdash; CYBR487 Lab1 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../_static/documentation_options.js?v=60dbed4a"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="selfscan module" href="selfscan.html" />
     <link rel="prev" title="scan package" href="scan.html" /> 
 </head>
 
@@ -56,11 +57,14 @@
 <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Code Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="netscan.html">netscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="port_scanner.html">port_scanner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html">report module</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="scan.html">scan package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="scan.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Plugins</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">scan.plugins package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="scan.html#submodules">Submodules</a></li>
@@ -68,6 +72,9 @@
 <li class="toctree-l3"><a class="reference internal" href="scan.html#module-scan">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="selfscan.html">selfscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">threads package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="traceroute.html">traceroute module</a></li>
 </ul>
 </li>
 </ul>
@@ -88,7 +95,7 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Code Documentation</a></li>
           <li class="breadcrumb-item"><a href="scan.html">scan package</a></li>
-      <li class="breadcrumb-item active">Plugins</li>
+      <li class="breadcrumb-item active">scan.plugins package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/modules/scan.plugins.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -98,8 +105,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="plugins">
-<h1>Plugins<a class="headerlink" href="#plugins" title="Link to this heading"></a></h1>
+  <section id="scan-plugins-package">
+<h1>scan.plugins package<a class="headerlink" href="#scan-plugins-package" title="Link to this heading"></a></h1>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
@@ -110,6 +117,7 @@
 <dt class="sig sig-object py" id="scan.plugins.arp.scan">
 <span class="sig-prename descclassname"><span class="pre">scan.plugins.arp.</span></span><span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/scan/plugins/arp.html#scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scan.plugins.arp.scan" title="Link to this definition"></a></dt>
 <dd><p>Performs an ARP packet scan on the provided IP range.</p>
+<p>Sends an ARP “Who is at x.x.x.x? Tell y.y.y.y” packet to each IP address.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -132,13 +140,15 @@
 <p>Function for scanning IP ranges with ICMP packets</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="scan.plugins.icmp.scan">
-<span class="sig-prename descclassname"><span class="pre">scan.plugins.icmp.</span></span><span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/scan/plugins/icmp.html#scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scan.plugins.icmp.scan" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">scan.plugins.icmp.</span></span><span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/scan/plugins/icmp.html#scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scan.plugins.icmp.scan" title="Link to this definition"></a></dt>
 <dd><p>Performs an ICMP packet scan on the provided IP range.</p>
+<p>Sends an ICMP Echo Request (or the chosen)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ip</strong> (<em>str</em><em> | </em><em>list</em><em>[</em><em>str</em><em>]</em>) – A string or list that contain the IP addresses to check</p></li>
-<li><p><strong>timeout</strong> (<em>int</em>) – The time in seconds to wait for a packet</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – The time in seconds to wait for a packet. Default 2</p></li>
+<li><p><strong>flags</strong> (<em>int</em>) – The ICMP type to send. Default Echo (8)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -156,13 +166,22 @@
 <p>Function for scanning IP ranges with ICMP packets</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="scan.plugins.tcp.scan">
-<span class="sig-prename descclassname"><span class="pre">scan.plugins.tcp.</span></span><span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/scan/plugins/tcp.html#scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scan.plugins.tcp.scan" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">scan.plugins.tcp.</span></span><span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'S'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/scan/plugins/tcp.html#scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scan.plugins.tcp.scan" title="Link to this definition"></a></dt>
 <dd><p>Performs a TCP packet scan on the provided IP range.</p>
+<dl class="simple">
+<dt>Sends a TCP packet with the following fields:</dt><dd><ul class="simple">
+<li><p>port: 80 (or the chosen port)</p></li>
+<li><p>flags: SYN (or the chosen flag)</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ip</strong> (<em>str</em><em> | </em><em>list</em><em>[</em><em>str</em><em>]</em>) – A string or list that contain the IP addresses to check</p></li>
 <li><p><strong>timeout</strong> (<em>int</em>) – The time in seconds to wait for a packet</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – The destination port to send the TCP packet to</p></li>
+<li><p><strong>flags</strong> (<em>str</em>) – The TCP flags to set in the packet</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -185,6 +204,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="scan.html" class="btn btn-neutral float-left" title="scan package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="selfscan.html" class="btn btn-neutral float-right" title="selfscan module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

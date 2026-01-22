@@ -7,15 +7,18 @@ Network Scan
 ------------
 
 To see the help for the program, type ``python3 analyzer.py`` inside of the :ref:`virtual environment <virt-env>`.
-.. literalinclude::
 
-    usage: analyzer.py -i [IP] [options]
+::
+
+    usage: analyzer.py [options]
 
     options:
-    -h, --help            show this help message and exit
+    -h, --help            show this help message and exit     
     -i, --ip IP           The IP range to scan
-    -s, --scan SCAN       The type of scan to perform. Default "arp"
+    -p, --protocol PROTOCOL The type of scan to perform. Default "arp"
+    -s, --selfscan        Scans the user's /proc system       
     -t, --timeout TIMEOUT The time in seconds to wait for a packet. Default 2 seconds
+    -tr, --traceroute {icmp,tcp} Perform traceroute on discovered hosts. Options: icmp, tcp
 
 ^^^^^^^^
 \-\-help
@@ -26,7 +29,7 @@ Displays the help message shown above.
 \-\-ip
 ^^^^^^
 .. attention::
-    This flag is required. You will get the help option if it is not included.
+    This flag is required if selfscan is not chosen. You will get the help option if it is not included.
 
 The range to scan. There are several inputs that can be accepted. Below is an table of Examples for what each passed in value converts to:
 
@@ -52,14 +55,15 @@ The range to scan. There are several inputs that can be accepted. Below is an ta
 
 Note that numbers other than 8, 16, 24, or 32 are allowed for the full CIDR notation.
 
-^^^^^^^^
-\-\-scan
-^^^^^^^^
+^^^^^^^^^^^^
+\-\-protocol
+^^^^^^^^^^^^
 The type of scan to run. Upon cloning the repository the following strings are accepted:
 
 - arp
 - icmp
 - tcp
+- nmap
 
 More details for each scan type can be found at :ref:`How To Scan <scanning>`.
 
@@ -68,6 +72,17 @@ More details for each scan type can be found at :ref:`How To Scan <scanning>`.
 
     If an invalid value is passed in, the program will default to an arp scan.
 
+^^^^^^^^^^^^
+\-\-selfscan
+^^^^^^^^^^^^
+
+.. attention::
+    This flag is required if ip is not chosen. You will get the help option if it is not included.
+
+Performs a self scan to see what port are open and what processes are running on them, similar to ``netstat -tupln``.
+
+.. image:: images/image.png
+
 ^^^^^^^^^^^
 \-\-timeout
 ^^^^^^^^^^^
@@ -75,3 +90,19 @@ This flag indicates the timeout time for each packet that is sent. The value pas
 
 .. note::
     This flag is not required. The default timeout is 2 seconds.
+
+^^^^^^^^^^^^^^
+\-\-traceroute
+^^^^^^^^^^^^^^
+
+Runs a traceroute to every IP address given in the \-\-ip flag. Shows the hops between you and each IP address.
+
+You can choose between two kinds of packets:
+
+- icmp
+- tcp
+
+To see what a traceroute does, go :ref:`here <_tracert>`.
+
+.. note::
+    This flag is not required. The default scan type is "icmp".

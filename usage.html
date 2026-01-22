@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How To Use &mdash; CYBR487 Lab1 1.0 documentation</title>
+  <title>How To Use &mdash; CYBR487 Lab1 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/documentation_options.js?v=60dbed4a"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -52,8 +52,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#network-scan">Network Scan</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#help">--help</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ip">--ip</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scan">--scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protocol">--protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#selfscan">--selfscan</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#timeout">--timeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#traceroute">--traceroute</a></li>
 </ul>
 </li>
 </ul>
@@ -97,15 +99,16 @@
 <p>This page contains information on how to use the program.</p>
 <section id="network-scan">
 <h2>Network Scan<a class="headerlink" href="#network-scan" title="Link to this heading"></a></h2>
-<p>To see the help for the program, type <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">analyzer.py</span></code> inside of the <a class="reference internal" href="getting_started.html#virt-env"><span class="std std-ref">virtual environment</span></a>.
-.. literalinclude:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="p">[</span><span class="n">IP</span><span class="p">]</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+<p>To see the help for the program, type <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">analyzer.py</span></code> inside of the <a class="reference internal" href="getting_started.html#virt-env"><span class="std std-ref">virtual environment</span></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
 
 <span class="n">options</span><span class="p">:</span>
 <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
 <span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">ip</span> <span class="n">IP</span>           <span class="n">The</span> <span class="n">IP</span> <span class="nb">range</span> <span class="n">to</span> <span class="n">scan</span>
-<span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">scan</span> <span class="n">SCAN</span>       <span class="n">The</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">scan</span> <span class="n">to</span> <span class="n">perform</span><span class="o">.</span> <span class="n">Default</span> <span class="s2">&quot;arp&quot;</span>
+<span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">--</span><span class="n">protocol</span> <span class="n">PROTOCOL</span> <span class="n">The</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">scan</span> <span class="n">to</span> <span class="n">perform</span><span class="o">.</span> <span class="n">Default</span> <span class="s2">&quot;arp&quot;</span>
+<span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">selfscan</span>        <span class="n">Scans</span> <span class="n">the</span> <span class="n">user</span><span class="s1">&#39;s /proc system</span>
 <span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">timeout</span> <span class="n">TIMEOUT</span> <span class="n">The</span> <span class="n">time</span> <span class="ow">in</span> <span class="n">seconds</span> <span class="n">to</span> <span class="n">wait</span> <span class="k">for</span> <span class="n">a</span> <span class="n">packet</span><span class="o">.</span> <span class="n">Default</span> <span class="mi">2</span> <span class="n">seconds</span>
+<span class="o">-</span><span class="n">tr</span><span class="p">,</span> <span class="o">--</span><span class="n">traceroute</span> <span class="p">{</span><span class="n">icmp</span><span class="p">,</span><span class="n">tcp</span><span class="p">}</span> <span class="n">Perform</span> <span class="n">traceroute</span> <span class="n">on</span> <span class="n">discovered</span> <span class="n">hosts</span><span class="o">.</span> <span class="n">Options</span><span class="p">:</span> <span class="n">icmp</span><span class="p">,</span> <span class="n">tcp</span>
 </pre></div>
 </div>
 <section id="help">
@@ -116,7 +119,7 @@
 <h3>--ip<a class="headerlink" href="#ip" title="Link to this heading"></a></h3>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
-<p>This flag is required. You will get the help option if it is not included.</p>
+<p>This flag is required if selfscan is not chosen. You will get the help option if it is not included.</p>
 </div>
 <p>The range to scan. There are several inputs that can be accepted. Below is an table of Examples for what each passed in value converts to:</p>
 <table class="docutils align-default">
@@ -154,13 +157,14 @@
 </table>
 <p>Note that numbers other than 8, 16, 24, or 32 are allowed for the full CIDR notation.</p>
 </section>
-<section id="scan">
-<h3>--scan<a class="headerlink" href="#scan" title="Link to this heading"></a></h3>
+<section id="protocol">
+<h3>--protocol<a class="headerlink" href="#protocol" title="Link to this heading"></a></h3>
 <p>The type of scan to run. Upon cloning the repository the following strings are accepted:</p>
 <ul class="simple">
 <li><p>arp</p></li>
 <li><p>icmp</p></li>
 <li><p>tcp</p></li>
+<li><p>nmap</p></li>
 </ul>
 <p>More details for each scan type can be found at <a class="reference internal" href="help/scanning.html#scanning"><span class="std std-ref">How To Scan</span></a>.</p>
 <div class="admonition note">
@@ -169,12 +173,35 @@
 <p>If an invalid value is passed in, the program will default to an arp scan.</p>
 </div>
 </section>
+<section id="selfscan">
+<h3>--selfscan<a class="headerlink" href="#selfscan" title="Link to this heading"></a></h3>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This flag is required if ip is not chosen. You will get the help option if it is not included.</p>
+</div>
+<p>Performs a self scan to see what port are open and what processes are running on them, similar to <code class="docutils literal notranslate"><span class="pre">netstat</span> <span class="pre">-tupln</span></code>.</p>
+<img alt="_images/image.png" src="_images/image.png" />
+</section>
 <section id="timeout">
 <h3>--timeout<a class="headerlink" href="#timeout" title="Link to this heading"></a></h3>
 <p>This flag indicates the timeout time for each packet that is sent. The value passed in must be in seconds, and must be an integer value.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This flag is not required. The default timeout is 2 seconds.</p>
+</div>
+</section>
+<section id="traceroute">
+<h3>--traceroute<a class="headerlink" href="#traceroute" title="Link to this heading"></a></h3>
+<p>Runs a traceroute to every IP address given in the --ip flag. Shows the hops between you and each IP address.</p>
+<p>You can choose between two kinds of packets:</p>
+<ul class="simple">
+<li><p>icmp</p></li>
+<li><p>tcp</p></li>
+</ul>
+<p>To see what a traceroute does, go <span class="xref std std-ref">here</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This flag is not required. The default scan type is “icmp”.</p>
 </div>
 </section>
 </section>
