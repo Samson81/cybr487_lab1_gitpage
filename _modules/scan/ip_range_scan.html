@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>scan.ip_range_scan &mdash; CYBR487 Lab1 1.0 documentation</title>
+  <title>scan.ip_range_scan &mdash; CYBR487 Lab1 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/documentation_options.js?v=60dbed4a"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -93,19 +93,20 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scan.plugins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">scans</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ipaddress</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">threads.CustomThread</span><span class="w"> </span><span class="kn">import</span> <span class="n">CustomThread</span><span class="p">,</span> <span class="n">loading</span><span class="p">,</span> <span class="n">NOT_DONE</span>
 
 <div class="viewcode-block" id="Scan">
 <a class="viewcode-back" href="../../modules/scan.html#scan.ip_range_scan.Scan">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Scan</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">ip_range</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-                 <span class="n">timeout</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+                 <span class="n">timeout</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
                  <span class="n">scan_type</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;arp&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization of the Scan class</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            ip_range (str | list[str]): A string or list that represents the range of IP addresses in CIDR notation.</span>
-<span class="sd">            timeout (int): An integer that represents the time in seconds to wait for a packet.</span>
+<span class="sd">            timeout (int | float): An integer or float that represents the time in seconds to wait for a packet.</span>
 <span class="sd">            scan_type (str): A string that indicates what scan to run. (should be defined in the plugin)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ip_range</span> <span class="o">=</span> <span class="n">ip_range</span>
@@ -117,6 +118,12 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_load_plugins</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads the plugins located in scan/plugins</span>
+
+<span class="sd">        Plugins that come by default:</span>
+<span class="sd">        - arp</span>
+<span class="sd">        - icmp</span>
+<span class="sd">        - nmap</span>
+<span class="sd">        - tcp</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            dict: A dictionary of all the loaded plugins.</span>
@@ -139,11 +146,13 @@
 
 <div class="viewcode-block" id="Scan.scan">
 <a class="viewcode-back" href="../../modules/scan.html#scan.ip_range_scan.Scan.scan">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calls the chosen scan types scan function with</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calls the chosen scan types scan function with the IP range</span>
+
+<span class="sd">        Scans the given IP range</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[str]: The list of IP addresses that responded, sorted</span>
+<span class="sd">            set[str]: The set of IP addresses that responded, sorted</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">scan_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plugins</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scan_type</span><span class="p">)</span>
 
@@ -151,9 +160,20 @@
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Undefined Scan Type </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_scan_type</span><span class="si">}</span><span class="se">\n</span><span class="s2"> Using ARP.&quot;</span><span class="p">)</span>
             <span class="n">scan_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plugins</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scan_type</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_seen_ips</span> <span class="o">=</span> <span class="n">scan_function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ip_range</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span><span class="p">)</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">CustomThread</span><span class="p">(</span><span class="n">scan_function</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ip_range</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span><span class="p">)</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="n">CustomThread</span><span class="p">(</span><span class="n">loading</span><span class="p">,</span> <span class="n">not_done</span><span class="o">=</span><span class="n">NOT_DONE</span><span class="p">)</span> <span class="c1"># Creates a loading spinner</span>
 
-        <span class="n">temp_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_seen_ips</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Address</span><span class="p">)</span>
+        <span class="n">t1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">t2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="n">t1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="n">NOT_DONE</span><span class="o">.</span><span class="n">set</span><span class="p">()</span> <span class="c1"># Set event for loading bar</span>
+        <span class="n">t2</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_seen_ips</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">result</span>
+
+        <span class="c1"># Sorts the IP addresses and removes duplicates</span>
+        <span class="n">temp_list</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_seen_ips</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Address</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">temp_list</span></div>
 </div>

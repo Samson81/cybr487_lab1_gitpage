@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kinds of Scans &mdash; CYBR487 Lab1 1.0 documentation</title>
+  <title>Kinds of Scans &mdash; CYBR487 Lab1 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../_static/documentation_options.js?v=60dbed4a"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -56,6 +56,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#arp-scan">ARP Scan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#icmp-scan">ICMP Scan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tcp-scan">TCP Scan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nmap-scan">NMAP Scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#traceroute">Traceroute</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -150,6 +154,58 @@
 <p>Responses are based on whether or not the target ignores packets sent to closed ports.</p>
 </aside>
 </aside>
+</section>
+<section id="nmap-scan">
+<h2>NMAP Scan<a class="headerlink" href="#nmap-scan" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is based on the default scan that nmap uses with no arguments.</p>
+</div>
+<p>The Nmap scan is a special scan. Rather than using one type of packet it uses multiple. These are:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>ARP</dt><dd><ul>
+<li><p>Type: “who has”</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>ICMP</dt><dd><ul>
+<li><p>Type: (8) Echo Request</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>ICMP</dt><dd><ul>
+<li><p>Type: (13) Timestamp</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>TCP</dt><dd><ul>
+<li><p>Flags: ACK</p></li>
+<li><p>Port: 80</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>TCP</dt><dd><ul>
+<li><p>Flags: SYN</p></li>
+<li><p>Port: 443</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>If a response is recieved from any one of these packets, the computer is marked as alive/found.</p>
+<section id="traceroute">
+<span id="tracert"></span><h3>Traceroute<a class="headerlink" href="#traceroute" title="Link to this heading"></a></h3>
+<p>Traceroutes work by sending packets with an incrementing Time-To-Live (TTL). If a TTL drops to zero, the hop (router) that decremented it will send back an ICMP TTL Exceeded packet. When you recieve back an ICMP Echo or TCP SYN/ACK you know you have reached a minimum amount of hops to that machine, and using the ICMP TTL Exceeded packets, you can build the path it took.</p>
+</section>
 </section>
 </section>
 

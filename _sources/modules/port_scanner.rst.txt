@@ -1,0 +1,7 @@
+port\_scanner module
+====================
+
+.. automodule:: port_scanner
+   :members:
+   :show-inheritance:
+   :undoc-members:

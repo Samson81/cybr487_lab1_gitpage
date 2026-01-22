@@ -11,5 +11,4 @@ Code Documentation
    report
    scan
    selfscan
-   threads
    traceroute

@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>traceroute module &mdash; CYBR487 Lab1 2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=60dbed4a"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="selfscan module" href="selfscan.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CYBR487 Lab1
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">How To Use</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../help/scanning.html">Kinds of Scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">repo_for_pages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="netscan.html">netscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="port_scanner.html">port_scanner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html">report module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scan.html">scan package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="selfscan.html">selfscan module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">traceroute module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#traceroute.icmp_traceroute"><code class="docutils literal notranslate"><span class="pre">icmp_traceroute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#traceroute.probe_hop_icmp"><code class="docutils literal notranslate"><span class="pre">probe_hop_icmp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#traceroute.probe_hop_tcp"><code class="docutils literal notranslate"><span class="pre">probe_hop_tcp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#traceroute.tcp_traceroute"><code class="docutils literal notranslate"><span class="pre">tcp_traceroute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#traceroute.traceroute"><code class="docutils literal notranslate"><span class="pre">traceroute()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CYBR487 Lab1</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">repo_for_pages</a></li>
+      <li class="breadcrumb-item active">traceroute module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/traceroute.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-traceroute">
+<span id="traceroute-module"></span><h1>traceroute module<a class="headerlink" href="#module-traceroute" title="Link to this heading"></a></h1>
+<p>Traceroute functionality using ICMP or TCP packets</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="traceroute.icmp_traceroute">
+<span class="sig-prename descclassname"><span class="pre">traceroute.</span></span><span class="sig-name descname"><span class="pre">icmp_traceroute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_hops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/traceroute.html#icmp_traceroute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#traceroute.icmp_traceroute" title="Link to this definition"></a></dt>
+<dd><p>Perform ICMP-based traceroute</p>
+<p>Uses ICMP Echo Request packets with incrementing TTL values.
+Each hop is probed 3 times to handle packet loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_ip</strong> (<em>str</em>) – Destination IP address</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – Timeout for each probe</p></li>
+<li><p><strong>max_hops</strong> (<em>int</em>) – Maximum hops to try</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Formatted hop information</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="traceroute.probe_hop_icmp">
+<span class="sig-prename descclassname"><span class="pre">traceroute.</span></span><span class="sig-name descname"><span class="pre">probe_hop_icmp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ttl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/traceroute.html#probe_hop_icmp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#traceroute.probe_hop_icmp" title="Link to this definition"></a></dt>
+<dd><p>Probe a single hop using ICMP, attempting 3 times</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_ip</strong> (<em>str</em>) – Destination IP</p></li>
+<li><p><strong>ttl</strong> (<em>int</em>) – Time-to-live value for this hop</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – Timeout for probe</p></li>
+<li><p><strong>attempts</strong> (<em>int</em>) – Number of attempts per hop. Default 3</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Contains ‘ip’, ‘ip_display’, ‘avg_rtt’, ‘responses’</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="traceroute.probe_hop_tcp">
+<span class="sig-prename descclassname"><span class="pre">traceroute.</span></span><span class="sig-name descname"><span class="pre">probe_hop_tcp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ttl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/traceroute.html#probe_hop_tcp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#traceroute.probe_hop_tcp" title="Link to this definition"></a></dt>
+<dd><p>Probe a single hop using TCP SYN, attempting 3 times</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_ip</strong> (<em>str</em>) – Destination IP</p></li>
+<li><p><strong>ttl</strong> (<em>int</em>) – Time-to-live value for this hop</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – Timeout for probe</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – Target TCP port</p></li>
+<li><p><strong>attempts</strong> (<em>int</em>) – Number of attempts per hop Default 3</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Contains ‘ip’, ‘ip_display’, ‘avg_rtt’, ‘responses’</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="traceroute.tcp_traceroute">
+<span class="sig-prename descclassname"><span class="pre">traceroute.</span></span><span class="sig-name descname"><span class="pre">tcp_traceroute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_hops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">80</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/traceroute.html#tcp_traceroute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#traceroute.tcp_traceroute" title="Link to this definition"></a></dt>
+<dd><p>Perform TCP-based traceroute</p>
+<p>Uses TCP SYN packets with incrementing TTL values.
+Each hop is probed 3 times to handle packet loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_ip</strong> (<em>str</em>) – Destination IP address</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – Timeout for each probe</p></li>
+<li><p><strong>max_hops</strong> (<em>int</em>) – Maximum hops to try</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – Target port. Default 80</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Formatted hop information</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="traceroute.traceroute">
+<span class="sig-prename descclassname"><span class="pre">traceroute.</span></span><span class="sig-name descname"><span class="pre">traceroute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_hops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/traceroute.html#traceroute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#traceroute.traceroute" title="Link to this definition"></a></dt>
+<dd><p>Perform traceroute to target IP using ICMP or TCP</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ip</strong> (<em>str</em>) – Target IP address</p></li>
+<li><p><strong>trace_type</strong> (<em>str</em>) – Type of traceroute (‘icmp’ or ‘tcp’)</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – Timeout in seconds for each probe. Default 2</p></li>
+<li><p><strong>max_hops</strong> (<em>int</em>) – Maximum number of hops to try. Default 30</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of hop information strings</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="selfscan.html" class="btn btn-neutral float-left" title="selfscan module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Corey Basden, Isaiah Bessire, Patrick Maas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

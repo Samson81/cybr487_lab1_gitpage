@@ -6,21 +6,21 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>scan package &mdash; CYBR487 Lab1 1.0 documentation</title>
+  <title>scan package &mdash; CYBR487 Lab1 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../_static/documentation_options.js?v=60dbed4a"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Plugins" href="scan.plugins.html" />
-    <link rel="prev" title="ip_parser.py" href="ip_parser.html" /> 
+    <link rel="next" title="scan.plugins package" href="scan.plugins.html" />
+    <link rel="prev" title="report module" href="report.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -57,11 +57,14 @@
 <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Code Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="netscan.html">netscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="port_scanner.html">port_scanner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html">report module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">scan package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="scan.plugins.html">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scan.plugins.html">scan.plugins package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
@@ -72,6 +75,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-scan">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="selfscan.html">selfscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">threads package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="traceroute.html">traceroute module</a></li>
 </ul>
 </li>
 </ul>
@@ -107,7 +113,7 @@
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="scan.plugins.html">Plugins</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="scan.plugins.html">scan.plugins package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="scan.plugins.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scan.plugins.html#module-scan.plugins.arp">scan.plugins.arp module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="scan.plugins.html#scan.plugins.arp.scan"><code class="docutils literal notranslate"><span class="pre">scan()</span></code></a></li>
@@ -143,18 +149,19 @@
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="scan.ip_range_scan.Scan">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">scan.ip_range_scan.</span></span><span class="sig-name descname"><span class="pre">Scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'arp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scan/ip_range_scan.html#Scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scan.ip_range_scan.Scan" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">scan.ip_range_scan.</span></span><span class="sig-name descname"><span class="pre">Scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'arp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/scan/ip_range_scan.html#Scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scan.ip_range_scan.Scan" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scan.ip_range_scan.Scan.scan">
-<span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/scan/ip_range_scan.html#Scan.scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scan.ip_range_scan.Scan.scan" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/scan/ip_range_scan.html#Scan.scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scan.ip_range_scan.Scan.scan" title="Link to this definition"></a></dt>
 <dd><p>Calls the chosen scan types scan function with the IP range</p>
+<p>Scans the given IP range</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The list of IP addresses that responded, sorted</p>
+<dd class="field-odd"><p>The set of IP addresses that responded, sorted</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[str]</p>
+<dd class="field-even"><p>set[str]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -171,8 +178,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="ip_parser.html" class="btn btn-neutral float-left" title="ip_parser.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="scan.plugins.html" class="btn btn-neutral float-right" title="Plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="report.html" class="btn btn-neutral float-left" title="report module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scan.plugins.html" class="btn btn-neutral float-right" title="scan.plugins package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

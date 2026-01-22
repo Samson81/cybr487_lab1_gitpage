@@ -1,7 +1,7 @@
-ip\_parser module
+traceroute module
 =================
 
-.. automodule:: ip_parser
+.. automodule:: traceroute
    :members:
    :show-inheritance:
    :undoc-members:
