@@ -10,15 +10,20 @@ To see the help for the program, type ``python3 analyzer.py`` inside of the :ref
 
 ::
 
-    usage: analyzer.py [options]
+   usage: analyzer.py [options]
 
     options:
-    -h, --help            show this help message and exit     
-    -i, --ip IP           The IP range to scan
-    -p, --protocol PROTOCOL The type of scan to perform. Default "arp"
-    -s, --selfscan        Scans the user's /proc system       
-    -t, --timeout TIMEOUT The time in seconds to wait for a packet. Default 2 seconds
-    -tr, --traceroute {icmp,tcp} Perform traceroute on discovered hosts. Options: icmp, tcp
+    -h, --help                            show this help message and exit
+    -i, --ip IP                           The IP range to scan
+    -p, --protocol PROTOCOL               The type of scan to perform. Default "arp"
+    -s, --selfscan                        Scans the user's /proc system
+    -t, --timeout TIMEOUT                 The time in seconds to wait for a packet. Default 2 seconds
+    -ps, --portscan [PORTSCAN]            Perform a portscan. Specify ports or leave blank for common ports.
+    -tr, --traceroute {icmp,tcp}          Perform traceroute on discovered hosts. Options: icmp, tcp
+    -trh, --traceroutehops TRACEROUTEHOPS Max number of hops for traceroute
+    -v, --inverted-match INVERTED_MATCH   Takes in a file of IP addresses to NOT scan
+    -d, --debug                           Show extra debug info
+    --top-ports {all,0,10,25,100,1000}    Scan the top x ports on every machine. Options: all, 10, 25, 100, 10000
 
 ^^^^^^^^
 \-\-help
@@ -102,7 +107,55 @@ You can choose between two kinds of packets:
 - icmp
 - tcp
 
-To see what a traceroute does, go :ref:`here <_tracert>`.
+To see what a traceroute does, go :ref:`here <tracert>`.
 
 .. note::
     This flag is not required. The default scan type is "icmp".
+
+
+^^^^^^^^^^^^^^^^^^
+\-\-traceroutehops
+^^^^^^^^^^^^^^^^^^
+
+The number of hops for traceroute to run before it quits.
+
+.. note::
+    This flag is not required. The default number of hops is 30.
+
+^^^^^^^^^^^^^^^^^^
+\-\-inverted-match
+^^^^^^^^^^^^^^^^^^
+
+The way to blacklist an IP address. You give it a file with a list of single IP addresses to not scan, and it removes them from the list to scan. 
+
+.. note::
+    This flag is not required. If a blocked IP is a router, it might still show up in the scan if it returns a packet.
+
+^^^^^^^^^
+\-\-debug
+^^^^^^^^^
+
+Dislays some extra debugging information.
+
+Example output:
+
+::
+
+    [Network Map Contents]
+    IP: 192.168.11.70
+    Object IP: 192.168.11.70
+    Open Ports: [135, 2179]
+    Closed Ports: [20, 21, 22, 23, 25, 53, 80, 110, 119, 123, 143, 161, 194, 443]
+    Hops: ['192.168.11.70 (3.50 ms)']
+
+.. note::
+    This flag is not required.
+
+^^^^^^^^^^^^^
+\-\-top-ports
+^^^^^^^^^^^^^
+
+Scan the top ``n`` ports of the system. These top ports are taken from nmaps list of services found `here <https://raw.githubusercontent.com/nmap/nmap/refs/heads/master/nmap-services>`__ in nmap's GitHub repo. The valid amounts for this flag include 10, 25, 100, 1000, and the ports are chosen based on the frequencies provided in the file.
+
+.. note::
+    This flag is not required. It does require an internet connection on first run since the file is not stored in this repository. After the first run, it will read from files located in ``<repo dir>/services/`` named as #services.json where # is the number of top ports.

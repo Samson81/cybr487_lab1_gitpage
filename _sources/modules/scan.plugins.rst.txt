@@ -20,6 +20,14 @@ scan.plugins.icmp module
    :show-inheritance:
    :undoc-members:
 
+scan.plugins.nmap module
+------------------------
+
+.. automodule:: scan.plugins.nmap
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 scan.plugins.tcp module
 -----------------------
 

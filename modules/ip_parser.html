@@ -60,15 +60,18 @@
 <li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">ip_parser module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ip_parser.normalize_cidr"><code class="docutils literal notranslate"><span class="pre">normalize_cidr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ip_parser.remove_ips"><code class="docutils literal notranslate"><span class="pre">remove_ips()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="netscan.html">netscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsing.html">parsing package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="port_scanner.html">port_scanner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="report.html">report module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scan.html">scan package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selfscan.html">selfscan module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="threads.html">threads package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="traceroute.html">traceroute module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
 </ul>
 </li>
 </ul>
@@ -115,6 +118,20 @@ and normalizes it to CIDR notation.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ip_parser.remove_ips">
+<span class="sig-prename descclassname"><span class="pre">ip_parser.</span></span><span class="sig-name descname"><span class="pre">remove_ips</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ips</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">IPv4Address</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">IPv4Address</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ip_parser.html#remove_ips"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ip_parser.remove_ips" title="Link to this definition"></a></dt>
+<dd><p>Removes the IP addresses in the file given from the list of IP addresses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – The path to the file of exclusions</p></li>
+<li><p><strong>ips</strong> (<em>list</em><em>[</em><em>ipaddress.IPv4Address</em><em>]</em>) – The list containing IPv4 addresses</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

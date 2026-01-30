@@ -19,7 +19,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="traceroute module" href="traceroute.html" />
+    <link rel="next" title="threads package" href="threads.html" />
     <link rel="prev" title="scan.plugins package" href="scan.plugins.html" /> 
 </head>
 
@@ -56,10 +56,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">repo_for_pages</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Code Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="netscan.html">netscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsing.html">parsing package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="port_scanner.html">port_scanner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="report.html">report module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scan.html">scan package</a></li>
@@ -70,7 +71,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#selfscan.scan_self"><code class="docutils literal notranslate"><span class="pre">scan_self()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">threads package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="traceroute.html">traceroute module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
 </ul>
 </li>
 </ul>
@@ -89,7 +92,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">repo_for_pages</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Code Documentation</a></li>
       <li class="breadcrumb-item active">selfscan module</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/modules/selfscan.rst.txt" rel="nofollow"> View page source</a>
@@ -109,13 +112,13 @@
 <dd><p>Find which process owns a socket by matching inode in /proc/[pid]/fd/</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>inode</strong> (<em>str</em>) – The inode of the file</p>
+<dd class="field-odd"><p><strong>inode</strong> (<em>str</em>) – The inode for the process</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A tuple containing either (pid, process_name) or (None, None)</p>
+<dd class="field-even"><p>(pid, process_name) or (None, None)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tuple[Optional[str], Optional[str]]</p>
+<dd class="field-odd"><p>(Tuple[Optional[str], Optional[str]])</p>
 </dd>
 </dl>
 </dd></dl>
@@ -126,25 +129,25 @@
 <dd><p>Parse /proc/net/tcp or /proc/net/udp file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>protocol</strong> (<em>str</em>) – The protocol directory to search</p>
+<dd class="field-odd"><p><strong>protocol</strong> (<em>str</em>) – tcp or udp protocol, which one to search</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of socket info dictionaries</p>
+<dd class="field-even"><p>list of socket info dictionaries</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[dict]</p>
+<dd class="field-odd"><p>(list[dict])</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="selfscan.is_listening_socket">
-<span class="sig-prename descclassname"><span class="pre">selfscan.</span></span><span class="sig-name descname"><span class="pre">is_listening_socket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">socket_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/selfscan.html#is_listening_socket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#selfscan.is_listening_socket" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">selfscan.</span></span><span class="sig-name descname"><span class="pre">is_listening_socket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">socket_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/selfscan.html#is_listening_socket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#selfscan.is_listening_socket" title="Link to this definition"></a></dt>
 <dd><p>Determine if socket is in listening state
 TCP state 0A = listening (10 in decimal)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>socket_info</strong> (<em>dict</em>) – Information about each socket</p>
+<dd class="field-odd"><p><strong>socket_info</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – The information about the socket</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Whether the socket is listening or not</p>
@@ -176,7 +179,7 @@ TCP state 0A = listening (10 in decimal)</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="scan.plugins.html" class="btn btn-neutral float-left" title="scan.plugins package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="traceroute.html" class="btn btn-neutral float-right" title="traceroute module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="threads.html" class="btn btn-neutral float-right" title="threads package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

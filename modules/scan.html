@@ -60,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="netscan.html">netscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsing.html">parsing package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="port_scanner.html">port_scanner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="report.html">report module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">scan package</a><ul>
@@ -78,6 +79,7 @@
 <li class="toctree-l2"><a class="reference internal" href="selfscan.html">selfscan module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="threads.html">threads package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="traceroute.html">traceroute module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
 </ul>
 </li>
 </ul>
@@ -123,6 +125,10 @@
 <li class="toctree-l3"><a class="reference internal" href="scan.plugins.html#scan.plugins.icmp.scan"><code class="docutils literal notranslate"><span class="pre">scan()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="scan.plugins.html#module-scan.plugins.nmap">scan.plugins.nmap module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scan.plugins.html#scan.plugins.nmap.scan"><code class="docutils literal notranslate"><span class="pre">scan()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="scan.plugins.html#module-scan.plugins.tcp">scan.plugins.tcp module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="scan.plugins.html#scan.plugins.tcp.scan"><code class="docutils literal notranslate"><span class="pre">scan()</span></code></a></li>
 </ul>
@@ -153,7 +159,7 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scan.ip_range_scan.Scan.scan">
-<span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/scan/ip_range_scan.html#Scan.scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scan.ip_range_scan.Scan.scan" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Address_Info</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/scan/ip_range_scan.html#Scan.scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scan.ip_range_scan.Scan.scan" title="Link to this definition"></a></dt>
 <dd><p>Calls the chosen scan types scan function with the IP range</p>
 <p>Scans the given IP range</p>
 <dl class="field-list simple">
@@ -161,7 +167,7 @@
 <dd class="field-odd"><p>The set of IP addresses that responded, sorted</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>set[str]</p>
+<dd class="field-even"><p>dict[str, Address_Info.Address_Info]</p>
 </dd>
 </dl>
 </dd></dl>

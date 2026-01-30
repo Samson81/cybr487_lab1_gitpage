@@ -56,10 +56,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">repo_for_pages</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Code Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="netscan.html">netscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsing.html">parsing package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="port_scanner.html">port_scanner module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">report module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#report.netscan_report"><code class="docutils literal notranslate"><span class="pre">netscan_report()</span></code></a></li>
@@ -69,7 +70,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="scan.html">scan package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selfscan.html">selfscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threads.html">threads package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="traceroute.html">traceroute module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
 </ul>
 </li>
 </ul>
@@ -88,7 +91,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">repo_for_pages</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Code Documentation</a></li>
       <li class="breadcrumb-item active">report module</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/modules/report.rst.txt" rel="nofollow"> View page source</a>
@@ -104,15 +107,13 @@
 <p>Display detailed scan results for discovered hosts</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="report.netscan_report">
-<span class="sig-prename descclassname"><span class="pre">report.</span></span><span class="sig-name descname"><span class="pre">netscan_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traceroute_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report.html#netscan_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.netscan_report" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">report.</span></span><span class="sig-name descname"><span class="pre">netscan_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Address_Info</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Namespace</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report.html#netscan_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.netscan_report" title="Link to this definition"></a></dt>
 <dd><p>Display detailed information for each discovered IP</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ip_list</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The list of IP addresses that were discovered</p></li>
-<li><p><strong>protocol</strong> (<em>str</em>) – The scan type that is being done</p></li>
-<li><p><strong>traceroute_type</strong> (<em>str</em><em> | </em><em>None</em>) – The type of traceroute. Default None</p></li>
-<li><p><strong>timeout</strong> (<em>int</em>) – The timeout for each packet. Default 2</p></li>
+<li><p><strong>network_map</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>Address_Info.Address_Info</em><em>]</em>) – The list of found IP addresses</p></li>
+<li><p><strong>args</strong> (<em>argparse.Namespace</em>) – The arguments passed into the analyzer</p></li>
 </ul>
 </dd>
 </dl>
@@ -125,9 +126,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<em>str</em>) – The text to put in the box</p></li>
-<li><p><strong>width</strong> (<em>int</em>) – The width of the box</p></li>
-<li><p><strong>start</strong> (<em>str</em>) – The beginning of the line</p></li>
+<li><p><strong>text</strong> (<em>str</em>) – The text to surround</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – The max width for the data</p></li>
+<li><p><strong>start</strong> (<em>str = &quot;</em><em>   | </em><em>&quot;</em>) – The start of the box</p></li>
 </ul>
 </dd>
 </dl>
@@ -139,7 +140,7 @@
 <dd><p>Generate a formatted report of listening ports</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>listening_ports</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – A list of the ports being listed on.</p>
+<dd class="field-odd"><p><strong>listening_ports</strong> (<em>list</em><em>[</em><em>dict</em><em>]</em>) – The ports that are currently being listened on</p>
 </dd>
 </dl>
 </dd></dl>

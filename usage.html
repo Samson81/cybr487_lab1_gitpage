@@ -56,6 +56,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#selfscan">--selfscan</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#timeout">--timeout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#traceroute">--traceroute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#traceroutehops">--traceroutehops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inverted-match">--inverted-match</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug">--debug</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#top-ports">--top-ports</a></li>
 </ul>
 </li>
 </ul>
@@ -102,13 +106,18 @@
 <p>To see the help for the program, type <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">analyzer.py</span></code> inside of the <a class="reference internal" href="getting_started.html#virt-env"><span class="std std-ref">virtual environment</span></a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
 
-<span class="n">options</span><span class="p">:</span>
-<span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
-<span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">ip</span> <span class="n">IP</span>           <span class="n">The</span> <span class="n">IP</span> <span class="nb">range</span> <span class="n">to</span> <span class="n">scan</span>
-<span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">--</span><span class="n">protocol</span> <span class="n">PROTOCOL</span> <span class="n">The</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">scan</span> <span class="n">to</span> <span class="n">perform</span><span class="o">.</span> <span class="n">Default</span> <span class="s2">&quot;arp&quot;</span>
-<span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">selfscan</span>        <span class="n">Scans</span> <span class="n">the</span> <span class="n">user</span><span class="s1">&#39;s /proc system</span>
-<span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">timeout</span> <span class="n">TIMEOUT</span> <span class="n">The</span> <span class="n">time</span> <span class="ow">in</span> <span class="n">seconds</span> <span class="n">to</span> <span class="n">wait</span> <span class="k">for</span> <span class="n">a</span> <span class="n">packet</span><span class="o">.</span> <span class="n">Default</span> <span class="mi">2</span> <span class="n">seconds</span>
-<span class="o">-</span><span class="n">tr</span><span class="p">,</span> <span class="o">--</span><span class="n">traceroute</span> <span class="p">{</span><span class="n">icmp</span><span class="p">,</span><span class="n">tcp</span><span class="p">}</span> <span class="n">Perform</span> <span class="n">traceroute</span> <span class="n">on</span> <span class="n">discovered</span> <span class="n">hosts</span><span class="o">.</span> <span class="n">Options</span><span class="p">:</span> <span class="n">icmp</span><span class="p">,</span> <span class="n">tcp</span>
+ <span class="n">options</span><span class="p">:</span>
+ <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>                            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+ <span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">ip</span> <span class="n">IP</span>                           <span class="n">The</span> <span class="n">IP</span> <span class="nb">range</span> <span class="n">to</span> <span class="n">scan</span>
+ <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">--</span><span class="n">protocol</span> <span class="n">PROTOCOL</span>               <span class="n">The</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">scan</span> <span class="n">to</span> <span class="n">perform</span><span class="o">.</span> <span class="n">Default</span> <span class="s2">&quot;arp&quot;</span>
+ <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">selfscan</span>                        <span class="n">Scans</span> <span class="n">the</span> <span class="n">user</span><span class="s1">&#39;s /proc system</span>
+ <span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">timeout</span> <span class="n">TIMEOUT</span>                 <span class="n">The</span> <span class="n">time</span> <span class="ow">in</span> <span class="n">seconds</span> <span class="n">to</span> <span class="n">wait</span> <span class="k">for</span> <span class="n">a</span> <span class="n">packet</span><span class="o">.</span> <span class="n">Default</span> <span class="mi">2</span> <span class="n">seconds</span>
+ <span class="o">-</span><span class="n">ps</span><span class="p">,</span> <span class="o">--</span><span class="n">portscan</span> <span class="p">[</span><span class="n">PORTSCAN</span><span class="p">]</span>            <span class="n">Perform</span> <span class="n">a</span> <span class="n">portscan</span><span class="o">.</span> <span class="n">Specify</span> <span class="n">ports</span> <span class="ow">or</span> <span class="n">leave</span> <span class="n">blank</span> <span class="k">for</span> <span class="n">common</span> <span class="n">ports</span><span class="o">.</span>
+ <span class="o">-</span><span class="n">tr</span><span class="p">,</span> <span class="o">--</span><span class="n">traceroute</span> <span class="p">{</span><span class="n">icmp</span><span class="p">,</span><span class="n">tcp</span><span class="p">}</span>          <span class="n">Perform</span> <span class="n">traceroute</span> <span class="n">on</span> <span class="n">discovered</span> <span class="n">hosts</span><span class="o">.</span> <span class="n">Options</span><span class="p">:</span> <span class="n">icmp</span><span class="p">,</span> <span class="n">tcp</span>
+ <span class="o">-</span><span class="n">trh</span><span class="p">,</span> <span class="o">--</span><span class="n">traceroutehops</span> <span class="n">TRACEROUTEHOPS</span> <span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">hops</span> <span class="k">for</span> <span class="n">traceroute</span>
+ <span class="o">-</span><span class="n">v</span><span class="p">,</span> <span class="o">--</span><span class="n">inverted</span><span class="o">-</span><span class="n">match</span> <span class="n">INVERTED_MATCH</span>   <span class="n">Takes</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">file</span> <span class="n">of</span> <span class="n">IP</span> <span class="n">addresses</span> <span class="n">to</span> <span class="n">NOT</span> <span class="n">scan</span>
+ <span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="o">--</span><span class="n">debug</span>                           <span class="n">Show</span> <span class="n">extra</span> <span class="n">debug</span> <span class="n">info</span>
+ <span class="o">--</span><span class="n">top</span><span class="o">-</span><span class="n">ports</span> <span class="p">{</span><span class="nb">all</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">}</span>    <span class="n">Scan</span> <span class="n">the</span> <span class="n">top</span> <span class="n">x</span> <span class="n">ports</span> <span class="n">on</span> <span class="n">every</span> <span class="n">machine</span><span class="o">.</span> <span class="n">Options</span><span class="p">:</span> <span class="nb">all</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10000</span>
 </pre></div>
 </div>
 <section id="help">
@@ -198,10 +207,51 @@
 <li><p>icmp</p></li>
 <li><p>tcp</p></li>
 </ul>
-<p>To see what a traceroute does, go <span class="xref std std-ref">here</span>.</p>
+<p>To see what a traceroute does, go <a class="reference internal" href="help/scanning.html#tracert"><span class="std std-ref">here</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This flag is not required. The default scan type is “icmp”.</p>
+</div>
+</section>
+<section id="traceroutehops">
+<h3>--traceroutehops<a class="headerlink" href="#traceroutehops" title="Link to this heading"></a></h3>
+<p>The number of hops for traceroute to run before it quits.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This flag is not required. The default number of hops is 30.</p>
+</div>
+</section>
+<section id="inverted-match">
+<h3>--inverted-match<a class="headerlink" href="#inverted-match" title="Link to this heading"></a></h3>
+<p>The way to blacklist an IP address. You give it a file with a list of single IP addresses to not scan, and it removes them from the list to scan.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This flag is not required. If a blocked IP is a router, it might still show up in the scan if it returns a packet.</p>
+</div>
+</section>
+<section id="debug">
+<h3>--debug<a class="headerlink" href="#debug" title="Link to this heading"></a></h3>
+<p>Dislays some extra debugging information.</p>
+<p>Example output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Network</span> <span class="n">Map</span> <span class="n">Contents</span><span class="p">]</span>
+<span class="n">IP</span><span class="p">:</span> <span class="mf">192.168.11.70</span>
+<span class="n">Object</span> <span class="n">IP</span><span class="p">:</span> <span class="mf">192.168.11.70</span>
+<span class="n">Open</span> <span class="n">Ports</span><span class="p">:</span> <span class="p">[</span><span class="mi">135</span><span class="p">,</span> <span class="mi">2179</span><span class="p">]</span>
+<span class="n">Closed</span> <span class="n">Ports</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span> <span class="mi">194</span><span class="p">,</span> <span class="mi">443</span><span class="p">]</span>
+<span class="n">Hops</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;192.168.11.70 (3.50 ms)&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This flag is not required.</p>
+</div>
+</section>
+<section id="top-ports">
+<h3>--top-ports<a class="headerlink" href="#top-ports" title="Link to this heading"></a></h3>
+<p>Scan the top <code class="docutils literal notranslate"><span class="pre">n</span></code> ports of the system. These top ports are taken from nmaps list of services found <a class="reference external" href="https://raw.githubusercontent.com/nmap/nmap/refs/heads/master/nmap-services">here</a> in nmap’s GitHub repo. The valid amounts for this flag include 10, 25, 100, 1000, and the ports are chosen based on the frequencies provided in the file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This flag is not required. It does require an internet connection on first run since the file is not stored in this repository. After the first run, it will read from files located in <code class="docutils literal notranslate"><span class="pre">&lt;repo</span> <span class="pre">dir&gt;/services/</span></code> named as #services.json where # is the number of top ports.</p>
 </div>
 </section>
 </section>
