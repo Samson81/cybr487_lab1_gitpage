@@ -53,7 +53,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">repo_for_pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Code Documentation</a></li>
 </ul>
 
         </div>
@@ -86,33 +86,36 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">scapy.all</span><span class="w"> </span><span class="kn">import</span> <span class="n">IP</span><span class="p">,</span> <span class="n">ICMP</span><span class="p">,</span> <span class="n">TCP</span><span class="p">,</span> <span class="n">sr1</span><span class="p">,</span> <span class="n">conf</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">custobj</span><span class="w"> </span><span class="kn">import</span> <span class="n">Address_Info</span>
 
 <span class="c1">#shut scapy up</span>
 <span class="n">conf</span><span class="o">.</span><span class="n">verb</span> <span class="o">=</span> <span class="mi">0</span>
 
 <div class="viewcode-block" id="traceroute">
 <a class="viewcode-back" href="../modules/traceroute.html#traceroute.traceroute">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">traceroute</span><span class="p">(</span><span class="n">ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">trace_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">max_hops</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">traceroute</span><span class="p">(</span><span class="n">target_info</span><span class="p">:</span> <span class="n">Address_Info</span><span class="o">.</span><span class="n">Address_Info</span><span class="p">,</span>
+               <span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform traceroute to target IP using ICMP or TCP</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">        ip (str): Target IP address</span>
-<span class="sd">        trace_type (str): Type of traceroute (&#39;icmp&#39; or &#39;tcp&#39;)</span>
-<span class="sd">        timeout (int): Timeout in seconds for each probe. Default 2</span>
-<span class="sd">        max_hops (int): Maximum number of hops to try. Default 30</span>
-<span class="sd">        </span>
-<span class="sd">    Returns:</span>
-<span class="sd">        list[str]: List of hop information strings</span>
+<span class="sd">        target_info: Address_Info object to populate with hop data</span>
+<span class="sd">        args (argparse.Namespace): The arguments passed into the analyzer</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">trace_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;icmp&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">icmp_traceroute</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">max_hops</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">trace_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;tcp&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">tcp_traceroute</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">max_hops</span><span class="p">)</span></div>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">traceroute</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;icmp&#39;</span><span class="p">:</span>
+        <span class="n">hops</span> <span class="o">=</span> <span class="n">icmp_traceroute</span><span class="p">(</span><span class="n">target_info</span><span class="o">.</span><span class="n">ip</span><span class="p">(),</span> <span class="n">args</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">traceroutehops</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">traceroute</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;tcp&#39;</span><span class="p">:</span>
+        <span class="n">hops</span> <span class="o">=</span> <span class="n">tcp_traceroute</span><span class="p">(</span><span class="n">target_info</span><span class="o">.</span><span class="n">ip</span><span class="p">(),</span> <span class="n">args</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">traceroutehops</span><span class="p">)</span>
+    
+    <span class="n">target_info</span><span class="o">.</span><span class="n">hops</span> <span class="o">=</span> <span class="n">hops</span></div>
 
 
 <div class="viewcode-block" id="icmp_traceroute">
 <a class="viewcode-back" href="../modules/traceroute.html#traceroute.icmp_traceroute">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">icmp_traceroute</span><span class="p">(</span><span class="n">target_ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_hops</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">icmp_traceroute</span><span class="p">(</span><span class="n">target_ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="n">max_hops</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform ICMP-based traceroute</span>
 <span class="sd">    </span>
 <span class="sd">    Uses ICMP Echo Request packets with incrementing TTL values.</span>
@@ -137,10 +140,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">hops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hop_info</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">hop_info</span><span class="p">[</span><span class="s1">&#39;avg_rtt&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
             
-            <span class="c1">#cjeck if we reached the destination</span>
-            <span class="k">if</span> <span class="n">hop_info</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">target_ip</span><span class="p">:</span>
-                <span class="n">reached_destination</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="k">break</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="n">ttl</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">hops</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            
+        <span class="c1">#cjeck if we reached the destination</span>
+        <span class="k">if</span> <span class="n">hop_info</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">target_ip</span><span class="p">:</span>
+            <span class="n">reached_destination</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">break</span>
     
     <span class="k">if</span> <span class="ow">not</span> <span class="n">reached_destination</span> <span class="ow">and</span> <span class="n">ttl</span> <span class="o">==</span> <span class="n">max_hops</span><span class="p">:</span>
         <span class="n">hops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max hops (</span><span class="si">{</span><span class="n">max_hops</span><span class="si">}</span><span class="s2">) reached - destination may be further&quot;</span><span class="p">)</span>
@@ -150,7 +155,10 @@
 
 <div class="viewcode-block" id="tcp_traceroute">
 <a class="viewcode-back" href="../modules/traceroute.html#traceroute.tcp_traceroute">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">tcp_traceroute</span><span class="p">(</span><span class="n">target_ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_hops</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">80</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tcp_traceroute</span><span class="p">(</span><span class="n">target_ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                   <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                   <span class="n">max_hops</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                   <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">80</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform TCP-based traceroute</span>
 <span class="sd">    </span>
 <span class="sd">    Uses TCP SYN packets with incrementing TTL values.</span>
@@ -160,7 +168,7 @@
 <span class="sd">        target_ip (str): Destination IP address</span>
 <span class="sd">        timeout (int): Timeout for each probe</span>
 <span class="sd">        max_hops (int): Maximum hops to try</span>
-<span class="sd">        port (int): Target port. Default 80</span>
+<span class="sd">        port (int): Target port (default 80)</span>
 <span class="sd">        </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        list[str]: Formatted hop information</span>
@@ -175,11 +183,13 @@
             <span class="n">hops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hop_info</span><span class="p">[</span><span class="s1">&#39;ip_display&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">hop_info</span><span class="p">[</span><span class="s1">&#39;avg_rtt&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">hops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hop_info</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">hop_info</span><span class="p">[</span><span class="s1">&#39;avg_rtt&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="n">ttl</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">hops</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             
-            <span class="c1">#check if we reached the destination</span>
-            <span class="k">if</span> <span class="n">hop_info</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">target_ip</span><span class="p">:</span>
-                <span class="n">reached_destination</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="k">break</span>
+        <span class="c1">#check if we reached the destination</span>
+        <span class="k">if</span> <span class="n">hop_info</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">target_ip</span><span class="p">:</span>
+            <span class="n">reached_destination</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">break</span>
     
     <span class="k">if</span> <span class="ow">not</span> <span class="n">reached_destination</span> <span class="ow">and</span> <span class="n">ttl</span> <span class="o">==</span> <span class="n">max_hops</span><span class="p">:</span>
         <span class="n">hops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max hops (</span><span class="si">{</span><span class="n">max_hops</span><span class="si">}</span><span class="s2">) reached - destination may be further&quot;</span><span class="p">)</span>
@@ -189,17 +199,20 @@
 
 <div class="viewcode-block" id="probe_hop_icmp">
 <a class="viewcode-back" href="../modules/traceroute.html#traceroute.probe_hop_icmp">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">probe_hop_icmp</span><span class="p">(</span><span class="n">target_ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">probe_hop_icmp</span><span class="p">(</span><span class="n">target_ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                   <span class="n">ttl</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                   <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                   <span class="n">attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Probe a single hop using ICMP, attempting 3 times</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
 <span class="sd">        target_ip (str): Destination IP</span>
 <span class="sd">        ttl (int): Time-to-live value for this hop</span>
 <span class="sd">        timeout (int): Timeout for probe</span>
-<span class="sd">        attempts (int): Number of attempts per hop. Default 3</span>
+<span class="sd">        attempts (int): Number of attempts per hop (default 3)</span>
 <span class="sd">        </span>
 <span class="sd">    Returns:</span>
-<span class="sd">        dict: Contains &#39;ip&#39;, &#39;ip_display&#39;, &#39;avg_rtt&#39;, &#39;responses&#39;</span>
+<span class="sd">        (dict[str, str]): Contains &#39;ip&#39;, &#39;ip_display&#39;, &#39;avg_rtt&#39;, &#39;responses&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">rtt_times</span> <span class="o">=</span> <span class="p">[]</span>
@@ -218,11 +231,13 @@
             <span class="n">rtt</span> <span class="o">=</span> <span class="p">(</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>  <span class="c1">#milliseconds probably better</span>
             <span class="n">rtt_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rtt</span><span class="p">)</span>
             
-            <span class="c1">#get the response IP</span>
-            <span class="k">if</span> <span class="n">responding_ip</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">responding_ip</span> <span class="o">=</span> <span class="n">reply</span><span class="o">.</span><span class="n">src</span>
-            
-            <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1">#get the response IP only if we got ICMP response</span>
+            <span class="k">if</span> <span class="n">reply</span><span class="o">.</span><span class="n">haslayer</span><span class="p">(</span><span class="n">ICMP</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">responding_ip</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">responding_ip</span> <span class="o">=</span> <span class="n">reply</span><span class="o">.</span><span class="n">src</span>
+                <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     
@@ -249,7 +264,11 @@
 
 <div class="viewcode-block" id="probe_hop_tcp">
 <a class="viewcode-back" href="../modules/traceroute.html#traceroute.probe_hop_tcp">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">probe_hop_tcp</span><span class="p">(</span><span class="n">target_ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">probe_hop_tcp</span><span class="p">(</span><span class="n">target_ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                  <span class="n">ttl</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                  <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                  <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                  <span class="n">attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Probe a single hop using TCP SYN, attempting 3 times</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
@@ -257,10 +276,10 @@
 <span class="sd">        ttl (int): Time-to-live value for this hop</span>
 <span class="sd">        timeout (int): Timeout for probe</span>
 <span class="sd">        port (int): Target TCP port</span>
-<span class="sd">        attempts (int): Number of attempts per hop Default 3</span>
+<span class="sd">        attempts (int = 3): Number of attempts per hop (default 3)</span>
 <span class="sd">        </span>
 <span class="sd">    Returns:</span>
-<span class="sd">        dict: Contains &#39;ip&#39;, &#39;ip_display&#39;, &#39;avg_rtt&#39;, &#39;responses&#39;</span>
+<span class="sd">        (dict[str, str]): Contains &#39;ip&#39;, &#39;ip_display&#39;, &#39;avg_rtt&#39;, &#39;responses&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">rtt_times</span> <span class="o">=</span> <span class="p">[]</span>
@@ -279,11 +298,14 @@
             <span class="n">rtt</span> <span class="o">=</span> <span class="p">(</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>  <span class="c1">#milliseconds</span>
             <span class="n">rtt_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rtt</span><span class="p">)</span>
             
-            <span class="c1">#get the response IP</span>
-            <span class="k">if</span> <span class="n">responding_ip</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">responding_ip</span> <span class="o">=</span> <span class="n">reply</span><span class="o">.</span><span class="n">src</span>
-            
-            <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1">#get the response IP only if we get ICMP time exceeded or</span>
+            <span class="c1">#TCP response from final destination</span>
+            <span class="k">if</span> <span class="n">reply</span><span class="o">.</span><span class="n">haslayer</span><span class="p">(</span><span class="n">ICMP</span><span class="p">)</span> <span class="ow">or</span> <span class="n">reply</span><span class="o">.</span><span class="n">haslayer</span><span class="p">(</span><span class="n">TCP</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">responding_ip</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">responding_ip</span> <span class="o">=</span> <span class="n">reply</span><span class="o">.</span><span class="n">src</span>        
+                <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     

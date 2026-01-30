@@ -1,0 +1,29 @@
+parsing package
+===============
+
+Submodules
+----------
+
+parsing.ip\_parser module
+-------------------------
+
+.. automodule:: parsing.ip_parser
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+parsing.port\_parser module
+---------------------------
+
+.. automodule:: parsing.port_parser
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: parsing
+   :members:
+   :show-inheritance:
+   :undoc-members:

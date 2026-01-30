@@ -53,7 +53,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">repo_for_pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Code Documentation</a></li>
 </ul>
 
         </div>
@@ -84,26 +84,34 @@
 <span></span><span class="sd">&quot;&quot;&quot;Display detailed scan results for discovered hosts</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">port_scanner</span><span class="w"> </span><span class="kn">import</span> <span class="n">scan_ports</span>  <span class="c1"># New module you&#39;ll create</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">traceroute</span><span class="w"> </span><span class="kn">import</span> <span class="n">traceroute</span>     <span class="c1"># New module you&#39;ll create</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">custobj</span><span class="w"> </span><span class="kn">import</span> <span class="n">Address_Info</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">traceroute</span><span class="w"> </span><span class="kn">import</span> <span class="n">traceroute</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">COMMON_PORTS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">parsing.port_parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">Port_Parse</span>
 
 <div class="viewcode-block" id="netscan_report">
 <a class="viewcode-back" href="../modules/report.html#report.netscan_report">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">netscan_report</span><span class="p">(</span><span class="n">ip_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-                   <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                   <span class="n">traceroute_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                   <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">netscan_report</span><span class="p">(</span><span class="n">network_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Address_Info</span><span class="o">.</span><span class="n">Address_Info</span><span class="p">],</span>
+                   <span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Display detailed information for each discovered IP</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">        ip_list (list[str]): The list of IP addresses that were discovered</span>
-<span class="sd">        protocol (str): The scan type that is being done</span>
-<span class="sd">        traceroute_type (str | None): The type of traceroute. Default None</span>
-<span class="sd">        timeout (int): The timeout for each packet. Default 2</span>
+<span class="sd">        network_map (dict[str, Address_Info.Address_Info]): The list of found IP addresses</span>
+<span class="sd">        args (argparse.Namespace): The arguments passed into the analyzer</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="n">ip_list</span><span class="p">:</span>
-        <span class="n">host_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Host: </span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">do_traceroute</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">traceroute</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+
+    <span class="c1">#sort IPs numerically by converting each octet to an integer</span>
+    <span class="n">sorted_ips</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+        <span class="n">network_map</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span>
+        <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">part</span><span class="p">)</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)]</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">target_ip</span><span class="p">,</span> <span class="n">target_info</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sorted_ips</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">host_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">idx</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> │ Host: </span><span class="si">{</span><span class="n">target_ip</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">box_width</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">host_text</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span>
     
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">┌</span><span class="si">{</span><span class="s1">&#39;─&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">box_width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">┐&quot;</span><span class="p">)</span>
@@ -111,21 +119,26 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;└┬</span><span class="si">{</span><span class="s1">&#39;─&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">box_width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">┘&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; │&quot;</span><span class="p">)</span>
         
-        <span class="c1">#do the port scan</span>
-        <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39; ├─&#39;</span> <span class="k">if</span> <span class="n">traceroute_type</span> <span class="k">else</span> <span class="s1">&#39; └─&#39;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">[Port Scan]&quot;</span><span class="p">)</span>
-        <span class="n">port_results</span> <span class="o">=</span> <span class="n">scan_ports</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>  <span class="c1">#returns dict of open ports</span>
-        <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39; │   &#39;</span> <span class="k">if</span> <span class="n">traceroute_type</span> <span class="k">else</span> <span class="s1">&#39;     &#39;</span>
-        <span class="k">for</span> <span class="n">port</span><span class="p">,</span> <span class="n">service</span> <span class="ow">in</span> <span class="n">port_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">Port </span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">/tcp: OPEN (</span><span class="si">{</span><span class="n">service</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">portscan</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1">#report on optional port scan</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39; ├─&#39;</span> <span class="k">if</span> <span class="n">do_traceroute</span> <span class="k">else</span> <span class="s1">&#39; └─&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">[Port Scan]&quot;</span><span class="p">)</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39; │   &#39;</span> <span class="k">if</span> <span class="n">do_traceroute</span> <span class="k">else</span> <span class="s1">&#39;     &#39;</span>
+            
+            <span class="k">if</span> <span class="n">target_info</span><span class="o">.</span><span class="n">oports</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">target_info</span><span class="o">.</span><span class="n">oports</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">Port_Parse</span><span class="o">.</span><span class="n">all</span><span class="p">:</span>
+                        <span class="n">service</span> <span class="o">=</span> <span class="n">Port_Parse</span><span class="o">.</span><span class="n">get_service</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> 
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">service</span> <span class="o">=</span> <span class="n">COMMON_PORTS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="s2">&quot;Unkown&quot;</span><span class="p">)</span> <span class="c1"># If the services have not been filled out in Port_Parse for some reason</span>
+                    
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">Port </span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">/tcp: OPEN (</span><span class="si">{</span><span class="n">service</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
         
         <span class="c1">#do the traceroute if requested</span>
-        <span class="k">if</span> <span class="n">traceroute_type</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">do_traceroute</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; │&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; └─[Traceroute - </span><span class="si">{</span><span class="n">traceroute_type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
-            <span class="n">hops</span> <span class="o">=</span> <span class="n">traceroute</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">traceroute_type</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>  <span class="c1">#returns list of hops</span>
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hops</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">hop</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; └─[Traceroute - </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">traceroute</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+            <span class="n">traceroute</span><span class="p">(</span><span class="n">target_info</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
                 
     <span class="nb">print</span><span class="p">()</span></div>
 
@@ -134,11 +147,11 @@
 <a class="viewcode-back" href="../modules/report.html#report.print_boxed_line">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">print_boxed_line</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;   │ &quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Print text in a box with padding to match width</span>
-
+<span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">        text (str): The text to put in the box</span>
-<span class="sd">        width (int): The width of the box</span>
-<span class="sd">        start (str): The beginning of the line </span>
+<span class="sd">        text (str): The text to surround</span>
+<span class="sd">        width (int): The max width for the data</span>
+<span class="sd">        start (str = &quot;   | &quot;): The start of the box</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">padding</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">start</span><span class="si">}{</span><span class="n">text</span><span class="si">}{</span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">padding</span><span class="si">}</span><span class="s2"> │&quot;</span><span class="p">)</span></div>
@@ -150,7 +163,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a formatted report of listening ports</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        listening_ports (list[dict]): A list of the ports being listed on.</span>
+<span class="sd">        listening_ports (list[dict]): The ports that are currently being listened on</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">listening_ports</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;No listening ports found.</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -181,7 +194,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; │ ┌</span><span class="si">{</span><span class="s1">&#39;─&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">content_width</span><span class="si">}</span><span class="s2">──┐&quot;</span><span class="p">)</span>
 
-    <span class="c1">#print column headers and seperator</span>
+    <span class="c1">#print column headers and separator</span>
     <span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;PORT&#39;</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;PROTOCOL&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;ADDRESS&#39;</span><span class="si">:</span><span class="s2">&lt;18</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;PID&#39;</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;PROCESS&#39;</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">print_boxed_line</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">content_width</span><span class="p">,</span> <span class="s2">&quot; │ │ &quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; └─┤</span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">content_width</span><span class="si">}</span><span class="s2">--│&quot;</span><span class="p">)</span>

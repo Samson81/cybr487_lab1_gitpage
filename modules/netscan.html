@@ -19,7 +19,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="port_scanner module" href="port_scanner.html" />
+    <link rel="next" title="parsing package" href="parsing.html" />
     <link rel="prev" title="ip_parser module" href="ip_parser.html" /> 
 </head>
 
@@ -63,12 +63,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#netscan.scan_network"><code class="docutils literal notranslate"><span class="pre">scan_network()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="parsing.html">parsing package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="port_scanner.html">port_scanner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="report.html">report module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scan.html">scan package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selfscan.html">selfscan module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="threads.html">threads package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="traceroute.html">traceroute module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
 </ul>
 </li>
 </ul>
@@ -103,7 +105,7 @@
 <p>Function for performing the network scan</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="netscan.scan_network">
-<span class="sig-prename descclassname"><span class="pre">netscan.</span></span><span class="sig-name descname"><span class="pre">scan_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Namespace</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/netscan.html#scan_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netscan.scan_network" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">netscan.</span></span><span class="sig-name descname"><span class="pre">scan_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Namespace</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Address_Info</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/netscan.html#scan_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netscan.scan_network" title="Link to this definition"></a></dt>
 <dd><p>The function to analyze the given network</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -116,7 +118,7 @@
 <dd class="field-odd"><p>The set of IP addresses that responded to the scan</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>set[str]</p>
+<dd class="field-even"><p>dict[str, Address_Info.Address_Info]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -128,7 +130,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="ip_parser.html" class="btn btn-neutral float-left" title="ip_parser module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="port_scanner.html" class="btn btn-neutral float-right" title="port_scanner module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="parsing.html" class="btn btn-neutral float-right" title="parsing package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

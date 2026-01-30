@@ -93,6 +93,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scan.plugins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">scans</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ipaddress</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">custobj</span><span class="w"> </span><span class="kn">import</span> <span class="n">Address_Info</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">threads.CustomThread</span><span class="w"> </span><span class="kn">import</span> <span class="n">CustomThread</span><span class="p">,</span> <span class="n">loading</span><span class="p">,</span> <span class="n">NOT_DONE</span>
 
 <div class="viewcode-block" id="Scan">
@@ -146,13 +147,13 @@
 
 <div class="viewcode-block" id="Scan.scan">
 <a class="viewcode-back" href="../../modules/scan.html#scan.ip_range_scan.Scan.scan">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Address_Info</span><span class="o">.</span><span class="n">Address_Info</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calls the chosen scan types scan function with the IP range</span>
 
 <span class="sd">        Scans the given IP range</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            set[str]: The set of IP addresses that responded, sorted</span>
+<span class="sd">            dict[str, Address_Info.Address_Info]: The set of IP addresses that responded, sorted</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">scan_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plugins</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scan_type</span><span class="p">)</span>
 
@@ -160,22 +161,21 @@
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Undefined Scan Type </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_scan_type</span><span class="si">}</span><span class="se">\n</span><span class="s2"> Using ARP.&quot;</span><span class="p">)</span>
             <span class="n">scan_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plugins</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scan_type</span><span class="p">)</span>
 
-        <span class="n">t1</span> <span class="o">=</span> <span class="n">CustomThread</span><span class="p">(</span><span class="n">scan_function</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ip_range</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span><span class="p">)</span>
-        <span class="n">t2</span> <span class="o">=</span> <span class="n">CustomThread</span><span class="p">(</span><span class="n">loading</span><span class="p">,</span> <span class="n">not_done</span><span class="o">=</span><span class="n">NOT_DONE</span><span class="p">)</span> <span class="c1"># Creates a loading spinner</span>
+        <span class="n">throbber</span> <span class="o">=</span> <span class="n">CustomThread</span><span class="p">(</span><span class="n">loading</span><span class="p">,</span> <span class="n">not_done</span><span class="o">=</span><span class="n">NOT_DONE</span><span class="p">)</span> <span class="c1"># Creates a loading spinner</span>
 
-        <span class="n">t1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-        <span class="n">t2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-        <span class="n">t1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="n">throbber</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_seen_ips</span> <span class="o">=</span> <span class="n">scan_function</span><span class="p">(</span><span class="n">ip</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ip_range</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span><span class="p">)</span>
         <span class="n">NOT_DONE</span><span class="o">.</span><span class="n">set</span><span class="p">()</span> <span class="c1"># Set event for loading bar</span>
-        <span class="n">t2</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_seen_ips</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">result</span>
+        <span class="n">throbber</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 
         <span class="c1"># Sorts the IP addresses and removes duplicates</span>
         <span class="n">temp_list</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_seen_ips</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Address</span><span class="p">))</span>
+        
+        <span class="n">ip_list</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="n">temp_list</span><span class="p">:</span>
+            <span class="n">ip_list</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span> <span class="o">=</span> <span class="n">Address_Info</span><span class="o">.</span><span class="n">Address_Info</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">temp_list</span></div>
+        <span class="k">return</span> <span class="n">ip_list</span></div>
 </div>
 
 </pre></div>

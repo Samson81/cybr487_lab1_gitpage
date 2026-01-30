@@ -53,7 +53,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">repo_for_pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Code Documentation</a></li>
 </ul>
 
         </div>
@@ -83,53 +83,62 @@
   <h1>Source code for port_scanner</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Port scanning functionality</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">socket</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scapy.all</span><span class="w"> </span><span class="kn">import</span> <span class="n">sr1</span><span class="p">,</span> <span class="n">IP</span><span class="p">,</span> <span class="n">TCP</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scapy.all</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">custobj</span><span class="w"> </span><span class="kn">import</span> <span class="n">Address_Info</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">COMMON_PORTS</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 
 <div class="viewcode-block" id="scan_ports">
 <a class="viewcode-back" href="../modules/port_scanner.html#port_scanner.scan_ports">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">scan_ports</span><span class="p">(</span><span class="n">ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The method for scanning ports</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">scan_ports</span><span class="p">(</span><span class="n">ip</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Address_Info</span><span class="o">.</span><span class="n">Address_Info</span><span class="p">],</span>
+               <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+               <span class="n">ports</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scans all ports in the ports list or in the CUSTOM_PORTS variable</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        ip (str): The IP address to scan</span>
-<span class="sd">        timeout (int): The time to wait for each packet. Default 0.5</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        dict[int, str]: A dictionary of the open ports and services</span>
+<span class="sd">        ip (dict[str, Address_Info.Address_Info]): The list of IPs to scan</span>
+<span class="sd">        timeout (int | float = 0.5): The timeout for each packet in seconds</span>
+<span class="sd">        ports (list[int] | None = None): The ports to scan if the list is custom.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">common_ports</span> <span class="o">=</span> <span class="p">{</span><span class="mi">20</span><span class="p">:</span> <span class="s2">&quot;FTP&quot;</span><span class="p">,</span>
-                    <span class="mi">21</span><span class="p">:</span> <span class="s2">&quot;FTP&quot;</span><span class="p">,</span>
-                    <span class="mi">22</span><span class="p">:</span> <span class="s2">&quot;SSH&quot;</span><span class="p">,</span>
-                    <span class="mi">23</span><span class="p">:</span> <span class="s2">&quot;Telnet&quot;</span><span class="p">,</span>
-                    <span class="mi">25</span><span class="p">:</span> <span class="s2">&quot;SMTP&quot;</span><span class="p">,</span>
-                    <span class="mi">53</span><span class="p">:</span> <span class="s2">&quot;DNS&quot;</span><span class="p">,</span>
-                    <span class="mi">80</span><span class="p">:</span> <span class="s2">&quot;HTTP&quot;</span><span class="p">,</span>
-                    <span class="mi">110</span><span class="p">:</span> <span class="s2">&quot;POP3&quot;</span><span class="p">,</span>
-                    <span class="mi">119</span><span class="p">:</span> <span class="s2">&quot;NNTP&quot;</span><span class="p">,</span>
-                    <span class="mi">123</span><span class="p">:</span> <span class="s2">&quot;NTP&quot;</span><span class="p">,</span>
-                    <span class="mi">143</span><span class="p">:</span> <span class="s2">&quot;IMAP&quot;</span><span class="p">,</span>
-                    <span class="mi">161</span><span class="p">:</span> <span class="s2">&quot;SNMP&quot;</span><span class="p">,</span>
-                    <span class="mi">194</span><span class="p">:</span> <span class="s2">&quot;IRC&quot;</span><span class="p">,</span>
-                    <span class="mi">443</span><span class="p">:</span> <span class="s2">&quot;HTTPS&quot;</span>
-                    <span class="p">}</span>
-    <span class="n">open_ports</span> <span class="o">=</span> <span class="p">{}</span>
-    
-    <span class="k">for</span> <span class="n">port</span><span class="p">,</span> <span class="n">protocol</span> <span class="ow">in</span> <span class="n">common_ports</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="c1"># Send SYN packet</span>
-        <span class="n">syn_packet</span> <span class="o">=</span> <span class="n">IP</span><span class="p">(</span><span class="n">dst</span><span class="o">=</span><span class="n">ip</span><span class="p">)</span><span class="o">/</span><span class="n">TCP</span><span class="p">(</span><span class="n">dport</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="s2">&quot;S&quot;</span><span class="p">)</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">sr1</span><span class="p">(</span><span class="n">syn_packet</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        
-        <span class="c1">#print(f&quot;    Checking port {port}...&quot;)</span>
-        
-        <span class="c1"># Check if we got SYN-ACK (port open)</span>
-        <span class="k">if</span> <span class="n">response</span> <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">haslayer</span><span class="p">(</span><span class="n">TCP</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">response</span><span class="p">[</span><span class="n">TCP</span><span class="p">]</span><span class="o">.</span><span class="n">flags</span> <span class="o">==</span> <span class="mh">0x12</span><span class="p">:</span>  <span class="c1"># SYN-ACK (0x12 = SA)</span>
-                <span class="n">open_ports</span><span class="p">[</span><span class="n">port</span><span class="p">]</span> <span class="o">=</span> <span class="n">protocol</span>
-       
-    <span class="k">return</span> <span class="n">open_ports</span></div>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
+    <span class="n">packets</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">ips</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ip</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">ips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ports</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">ports</span> <span class="o">=</span> <span class="n">COMMON_PORTS</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span> <span class="c1"># Iterating over ports and IPs to create packets</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">ips</span><span class="p">:</span>
+            <span class="n">ip_packet</span> <span class="o">=</span> <span class="n">IP</span><span class="p">()</span>
+            <span class="n">tcp_packet</span> <span class="o">=</span> <span class="n">TCP</span><span class="p">()</span>
+            
+            <span class="n">ip_packet</span><span class="o">.</span><span class="n">dst</span> <span class="o">=</span> <span class="n">_</span>
+            
+            <span class="n">tcp_packet</span><span class="o">.</span><span class="n">dport</span> <span class="o">=</span> <span class="n">port</span>
+            <span class="n">tcp_packet</span><span class="o">.</span><span class="n">sport</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">37768</span><span class="p">,</span> <span class="mi">65535</span><span class="p">)</span>
+            <span class="n">tcp_packet</span><span class="o">.</span><span class="n">flags</span> <span class="o">=</span> <span class="s2">&quot;S&quot;</span>
+
+            <span class="n">packets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ip_packet</span><span class="o">/</span><span class="n">tcp_packet</span><span class="p">)</span>
     
+    <span class="n">ans</span><span class="p">,</span> <span class="n">unans</span> <span class="o">=</span> <span class="n">sr</span><span class="p">(</span><span class="n">packets</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Send packets</span>
+    
+    <span class="k">for</span> <span class="n">query</span><span class="p">,</span> <span class="n">resp</span> <span class="ow">in</span> <span class="n">ans</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="o">.</span><span class="n">haslayer</span><span class="p">(</span><span class="n">TCP</span><span class="p">):</span>
+            <span class="k">continue</span>
+        
+        <span class="n">port</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">TCP</span><span class="p">]</span><span class="o">.</span><span class="n">sport</span>
+        <span class="n">ip_addr</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="n">IP</span><span class="p">]</span><span class="o">.</span><span class="n">src</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="p">[</span><span class="n">TCP</span><span class="p">]</span><span class="o">.</span><span class="n">flags</span> <span class="o">==</span> <span class="s2">&quot;SA&quot;</span><span class="p">:</span> <span class="c1"># If there is a SYN/ACK, that means the port is open</span>
+            <span class="n">ip</span><span class="p">[</span><span class="n">ip_addr</span><span class="p">]</span><span class="o">.</span><span class="n">oports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">resp</span><span class="p">[</span><span class="n">TCP</span><span class="p">]</span><span class="o">.</span><span class="n">flags</span> <span class="o">==</span> <span class="s2">&quot;RA&quot;</span><span class="p">:</span> <span class="c1"># If there is a RST/ACK, that means the port is closed</span>
+            <span class="n">ip</span><span class="p">[</span><span class="n">ip_addr</span><span class="p">]</span><span class="o">.</span><span class="n">cports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">port</span><span class="p">)</span></div>
+
 </pre></div>
 
            </div>
