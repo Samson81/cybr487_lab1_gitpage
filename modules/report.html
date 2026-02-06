@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>report module &mdash; CYBR487 Lab1 2.0 documentation</title>
+  <title>report package &mdash; CYBR487 Lab1 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
@@ -19,8 +19,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="scan package" href="scan.html" />
-    <link rel="prev" title="port_scanner module" href="port_scanner.html" /> 
+    <link rel="next" title="scans package" href="scans.html" />
+    <link rel="prev" title="parsing package" href="parsing.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,7 +48,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../usage.html">How To Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Example Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Flags</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../flags.html">How To Use</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Help</span></p>
 <ul>
@@ -58,21 +62,41 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Code Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="netscan.html">netscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custobj.html">custobj package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parsing.html">parsing package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="port_scanner.html">port_scanner module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">report module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#report.netscan_report"><code class="docutils literal notranslate"><span class="pre">netscan_report()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#report.print_boxed_line"><code class="docutils literal notranslate"><span class="pre">print_boxed_line()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#report.selfscan_report"><code class="docutils literal notranslate"><span class="pre">selfscan_report()</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">report package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-report.all">report.all module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-report.print_host">report.print_host module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#report.print_host.host_report"><code class="docutils literal notranslate"><span class="pre">host_report()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="scan.html">scan package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="selfscan.html">selfscan module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="threads.html">threads package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="traceroute.html">traceroute module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-report.print_os">report.print_os module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#report.print_os.os_report"><code class="docutils literal notranslate"><span class="pre">os_report()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-report.print_portscan">report.print_portscan module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#report.print_portscan.portscan_report"><code class="docutils literal notranslate"><span class="pre">portscan_report()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-report.print_selfscan">report.print_selfscan module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#report.print_selfscan.print_boxed_line"><code class="docutils literal notranslate"><span class="pre">print_boxed_line()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#report.print_selfscan.selfscan_report"><code class="docutils literal notranslate"><span class="pre">selfscan_report()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-report.print_traceroute">report.print_traceroute module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#report.print_traceroute.traceroute_report"><code class="docutils literal notranslate"><span class="pre">traceroute_report()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-report.report">report.report module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#report.report.netscan_report"><code class="docutils literal notranslate"><span class="pre">netscan_report()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-report">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scans.html">scans package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html">visualization package</a></li>
 </ul>
 </li>
 </ul>
@@ -92,7 +116,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Code Documentation</a></li>
-      <li class="breadcrumb-item active">report module</li>
+      <li class="breadcrumb-item active">report package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/modules/report.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -102,26 +126,80 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-report">
-<span id="report-module"></span><h1>report module<a class="headerlink" href="#module-report" title="Link to this heading"></a></h1>
-<p>Display detailed scan results for discovered hosts</p>
+  <section id="report-package">
+<h1>report package<a class="headerlink" href="#report-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-report.all">
+<span id="report-all-module"></span><h2>report.all module<a class="headerlink" href="#module-report.all" title="Link to this heading"></a></h2>
+<p>Collects all print modules for report</p>
+</section>
+<section id="module-report.print_host">
+<span id="report-print-host-module"></span><h2>report.print_host module<a class="headerlink" href="#module-report.print_host" title="Link to this heading"></a></h2>
+<p>Displays the Host’s IP address</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="report.netscan_report">
-<span class="sig-prename descclassname"><span class="pre">report.</span></span><span class="sig-name descname"><span class="pre">netscan_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Address_Info</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Namespace</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report.html#netscan_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.netscan_report" title="Link to this definition"></a></dt>
-<dd><p>Display detailed information for each discovered IP</p>
+<dt class="sig sig-object py" id="report.print_host.host_report">
+<span class="sig-prename descclassname"><span class="pre">report.print_host.</span></span><span class="sig-name descname"><span class="pre">host_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report/print_host.html#host_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.print_host.host_report" title="Link to this definition"></a></dt>
+<dd><p>Prints the host IP address in a box</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>network_map</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>Address_Info.Address_Info</em><em>]</em>) – The list of found IP addresses</p></li>
-<li><p><strong>args</strong> (<em>argparse.Namespace</em>) – The arguments passed into the analyzer</p></li>
+<li><p><strong>idx</strong> (<em>int</em>) – The iterator number to display</p></li>
+<li><p><strong>target_ip</strong> (<em>str</em>) – The IP address to display</p></li>
+<li><p><strong>colors</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – The dictionary of colors for display purposes</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
+</section>
+<section id="module-report.print_os">
+<span id="report-print-os-module"></span><h2>report.print_os module<a class="headerlink" href="#module-report.print_os" title="Link to this heading"></a></h2>
+<p>Prints the OS information from the OS scan</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="report.print_boxed_line">
-<span class="sig-prename descclassname"><span class="pre">report.</span></span><span class="sig-name descname"><span class="pre">print_boxed_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'</span>&#160;&#160; <span class="pre">│</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report.html#print_boxed_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.print_boxed_line" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="report.print_os.os_report">
+<span class="sig-prename descclassname"><span class="pre">report.print_os.</span></span><span class="sig-name descname"><span class="pre">os_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">do_traceroute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">portscan</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info" title="custobj.Address_Info.Address_Info"><span class="pre">Address_Info</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report/print_os.html#os_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.print_os.os_report" title="Link to this definition"></a></dt>
+<dd><p>Displays OS information given in the target_info object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>do_traceroute</strong> (<em>bool</em>) – Changes what gets output</p></li>
+<li><p><strong>portscan</strong> (<em>str</em>) – The value passed into the main function containing the ports to scan</p></li>
+<li><p><strong>target_info</strong> (<a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info" title="custobj.Address_Info.Address_Info"><em>Address_Info</em></a>) – The object containing the OS info of it’s IP address</p></li>
+<li><p><strong>colors</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – The dictionary of colors for display purposes</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-report.print_portscan">
+<span id="report-print-portscan-module"></span><h2>report.print_portscan module<a class="headerlink" href="#module-report.print_portscan" title="Link to this heading"></a></h2>
+<p>The module for displaying the portscan</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="report.print_portscan.portscan_report">
+<span class="sig-prename descclassname"><span class="pre">report.print_portscan.</span></span><span class="sig-name descname"><span class="pre">portscan_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info" title="custobj.Address_Info.Address_Info"><span class="pre">Address_Info</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_traceroute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Namespace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report/print_portscan.html#portscan_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.print_portscan.portscan_report" title="Link to this definition"></a></dt>
+<dd><p>Displays the information from the portscan, as well as displaying CVE information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_info</strong> (<a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info" title="custobj.Address_Info.Address_Info"><em>Address_Info</em></a>) – The object containing information about an IP address</p></li>
+<li><p><strong>do_traceroute</strong> (<em>bool</em>) – Whether to do a traceroute (required for some nice output)</p></li>
+<li><p><strong>args</strong> (<em>Namespace</em>) – The args passed into the main function</p></li>
+<li><p><strong>colors</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – The dictionary of colors for display purposes</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-report.print_selfscan">
+<span id="report-print-selfscan-module"></span><h2>report.print_selfscan module<a class="headerlink" href="#module-report.print_selfscan" title="Link to this heading"></a></h2>
+<p>The module for displaying the selfscan</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="report.print_selfscan.print_boxed_line">
+<span class="sig-prename descclassname"><span class="pre">report.print_selfscan.</span></span><span class="sig-name descname"><span class="pre">print_boxed_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'</span>&#160;&#160; <span class="pre">│</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report/print_selfscan.html#print_boxed_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.print_selfscan.print_boxed_line" title="Link to this definition"></a></dt>
 <dd><p>Print text in a box with padding to match width</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -135,8 +213,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="report.selfscan_report">
-<span class="sig-prename descclassname"><span class="pre">report.</span></span><span class="sig-name descname"><span class="pre">selfscan_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listening_ports</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report.html#selfscan_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.selfscan_report" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="report.print_selfscan.selfscan_report">
+<span class="sig-prename descclassname"><span class="pre">report.print_selfscan.</span></span><span class="sig-name descname"><span class="pre">selfscan_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listening_ports</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report/print_selfscan.html#selfscan_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.print_selfscan.selfscan_report" title="Link to this definition"></a></dt>
 <dd><p>Generate a formatted report of listening ports</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -146,13 +224,54 @@
 </dd></dl>
 
 </section>
+<section id="module-report.print_traceroute">
+<span id="report-print-traceroute-module"></span><h2>report.print_traceroute module<a class="headerlink" href="#module-report.print_traceroute" title="Link to this heading"></a></h2>
+<p>Displays the traceroute</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="report.print_traceroute.traceroute_report">
+<span class="sig-prename descclassname"><span class="pre">report.print_traceroute.</span></span><span class="sig-name descname"><span class="pre">traceroute_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Namespace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info" title="custobj.Address_Info.Address_Info"><span class="pre">Address_Info</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report/print_traceroute.html#traceroute_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.print_traceroute.traceroute_report" title="Link to this definition"></a></dt>
+<dd><p>Prints the traceroute for the passed in object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>Namespace</em>) – The arguments passed into main</p></li>
+<li><p><strong>target_info</strong> (<a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info" title="custobj.Address_Info.Address_Info"><em>Address_Info</em></a>) – The object containing the IP address to perform the traceroute on</p></li>
+<li><p><strong>colors</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – The dictionary of colors for display purposes</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-report.report">
+<span id="report-report-module"></span><h2>report.report module<a class="headerlink" href="#module-report.report" title="Link to this heading"></a></h2>
+<p>Display detailed scan results for discovered hosts</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="report.report.netscan_report">
+<span class="sig-prename descclassname"><span class="pre">report.report.</span></span><span class="sig-name descname"><span class="pre">netscan_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info" title="custobj.Address_Info.Address_Info"><span class="pre">Address_Info</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Namespace</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/report/report.html#netscan_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#report.report.netscan_report" title="Link to this definition"></a></dt>
+<dd><p>Display detailed information for each discovered IP</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network_map</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info" title="custobj.Address_Info.Address_Info"><em>Address_Info.Address_Info</em></a><em>]</em>) – The list of found IP addresses</p></li>
+<li><p><strong>args</strong> (<em>Namespace</em>) – The arguments passed into the analyzer</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-report">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-report" title="Link to this heading"></a></h2>
+</section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="port_scanner.html" class="btn btn-neutral float-left" title="port_scanner module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="scan.html" class="btn btn-neutral float-right" title="scan package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="parsing.html" class="btn btn-neutral float-left" title="parsing package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scans.html" class="btn btn-neutral float-right" title="scans package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

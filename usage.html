@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How To Use &mdash; CYBR487 Lab1 2.0 documentation</title>
+  <title>Example Usage &mdash; CYBR487 Lab1 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Kinds of Scans" href="help/scanning.html" />
+    <link rel="next" title="How To Use" href="flags.html" />
     <link rel="prev" title="Getting Started" href="getting_started.html" /> 
 </head>
 
@@ -48,22 +48,48 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">How To Use</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#network-scan">Network Scan</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#help">--help</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ip">--ip</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#protocol">--protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#selfscan">--selfscan</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#timeout">--timeout</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#traceroute">--traceroute</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#traceroutehops">--traceroutehops</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#inverted-match">--inverted-match</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#debug">--debug</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#top-ports">--top-ports</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Example Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-scan">Basic Scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#command">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-output">Example Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#selfscan">Selfscan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Example Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nmap-scan-with-port-scan">Nmap Scan with Port Scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Example Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nmap-scan-with-select-and-top-ports">Nmap Scan with Select and Top Ports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Example Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nmap-scan-with-port-scan-and-traceroute">Nmap Scan with Port Scan and Traceroute</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Example Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nmap-scan-with-select-ports-and-top-ports-and-service-scan">Nmap Scan with Select Ports and Top Ports and Service Scan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Example Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#same-scan-as-above-with-os-detection-and-cve-detection">Same Scan as Above with OS Detection and CVE Detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Example Output</a></li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Flags</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="flags.html">How To Use</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Help</span></p>
 <ul>
@@ -88,7 +114,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">How To Use</li>
+      <li class="breadcrumb-item active">Example Usage</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -98,160 +124,165 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="how-to-use">
-<h1>How To Use<a class="headerlink" href="#how-to-use" title="Link to this heading"></a></h1>
-<p>This page contains information on how to use the program.</p>
-<section id="network-scan">
-<h2>Network Scan<a class="headerlink" href="#network-scan" title="Link to this heading"></a></h2>
-<p>To see the help for the program, type <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">analyzer.py</span></code> inside of the <a class="reference internal" href="getting_started.html#virt-env"><span class="std std-ref">virtual environment</span></a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
-
- <span class="n">options</span><span class="p">:</span>
- <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>                            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
- <span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">ip</span> <span class="n">IP</span>                           <span class="n">The</span> <span class="n">IP</span> <span class="nb">range</span> <span class="n">to</span> <span class="n">scan</span>
- <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="o">--</span><span class="n">protocol</span> <span class="n">PROTOCOL</span>               <span class="n">The</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">scan</span> <span class="n">to</span> <span class="n">perform</span><span class="o">.</span> <span class="n">Default</span> <span class="s2">&quot;arp&quot;</span>
- <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">selfscan</span>                        <span class="n">Scans</span> <span class="n">the</span> <span class="n">user</span><span class="s1">&#39;s /proc system</span>
- <span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">timeout</span> <span class="n">TIMEOUT</span>                 <span class="n">The</span> <span class="n">time</span> <span class="ow">in</span> <span class="n">seconds</span> <span class="n">to</span> <span class="n">wait</span> <span class="k">for</span> <span class="n">a</span> <span class="n">packet</span><span class="o">.</span> <span class="n">Default</span> <span class="mi">2</span> <span class="n">seconds</span>
- <span class="o">-</span><span class="n">ps</span><span class="p">,</span> <span class="o">--</span><span class="n">portscan</span> <span class="p">[</span><span class="n">PORTSCAN</span><span class="p">]</span>            <span class="n">Perform</span> <span class="n">a</span> <span class="n">portscan</span><span class="o">.</span> <span class="n">Specify</span> <span class="n">ports</span> <span class="ow">or</span> <span class="n">leave</span> <span class="n">blank</span> <span class="k">for</span> <span class="n">common</span> <span class="n">ports</span><span class="o">.</span>
- <span class="o">-</span><span class="n">tr</span><span class="p">,</span> <span class="o">--</span><span class="n">traceroute</span> <span class="p">{</span><span class="n">icmp</span><span class="p">,</span><span class="n">tcp</span><span class="p">}</span>          <span class="n">Perform</span> <span class="n">traceroute</span> <span class="n">on</span> <span class="n">discovered</span> <span class="n">hosts</span><span class="o">.</span> <span class="n">Options</span><span class="p">:</span> <span class="n">icmp</span><span class="p">,</span> <span class="n">tcp</span>
- <span class="o">-</span><span class="n">trh</span><span class="p">,</span> <span class="o">--</span><span class="n">traceroutehops</span> <span class="n">TRACEROUTEHOPS</span> <span class="n">Max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">hops</span> <span class="k">for</span> <span class="n">traceroute</span>
- <span class="o">-</span><span class="n">v</span><span class="p">,</span> <span class="o">--</span><span class="n">inverted</span><span class="o">-</span><span class="n">match</span> <span class="n">INVERTED_MATCH</span>   <span class="n">Takes</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">file</span> <span class="n">of</span> <span class="n">IP</span> <span class="n">addresses</span> <span class="n">to</span> <span class="n">NOT</span> <span class="n">scan</span>
- <span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="o">--</span><span class="n">debug</span>                           <span class="n">Show</span> <span class="n">extra</span> <span class="n">debug</span> <span class="n">info</span>
- <span class="o">--</span><span class="n">top</span><span class="o">-</span><span class="n">ports</span> <span class="p">{</span><span class="nb">all</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">}</span>    <span class="n">Scan</span> <span class="n">the</span> <span class="n">top</span> <span class="n">x</span> <span class="n">ports</span> <span class="n">on</span> <span class="n">every</span> <span class="n">machine</span><span class="o">.</span> <span class="n">Options</span><span class="p">:</span> <span class="nb">all</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10000</span>
-</pre></div>
-</div>
-<section id="help">
-<h3>--help<a class="headerlink" href="#help" title="Link to this heading"></a></h3>
-<p>Displays the help message shown above.</p>
-</section>
-<section id="ip">
-<h3>--ip<a class="headerlink" href="#ip" title="Link to this heading"></a></h3>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>This flag is required if selfscan is not chosen. You will get the help option if it is not included.</p>
-</div>
-<p>The range to scan. There are several inputs that can be accepted. Below is an table of Examples for what each passed in value converts to:</p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Passed In</p></th>
-<th class="head"><p>Converted To</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>192</p></td>
-<td><p>192.0.0.0/8</p></td>
-</tr>
-<tr class="row-odd"><td><p>192.168</p></td>
-<td><p>192.168.0.0/16</p></td>
-</tr>
-<tr class="row-even"><td><p>192.168.1</p></td>
-<td><p>192.168.1.0/24</p></td>
-</tr>
-<tr class="row-odd"><td><p>192.168.1.1</p></td>
-<td><p>192.168.1.1/32</p></td>
-</tr>
-<tr class="row-even"><td><p>192.168.1.1/8</p></td>
-<td><p>192.0.0.0/8</p></td>
-</tr>
-<tr class="row-odd"><td><p>192.168.1.1/16</p></td>
-<td><p>192.168.0.0/16</p></td>
-</tr>
-<tr class="row-even"><td><p>192.168.1.1/24</p></td>
-<td><p>192.168.1.0/24</p></td>
-</tr>
-<tr class="row-odd"><td><p>192.168.1.1/32</p></td>
-<td><p>192.168.1.1/32</p></td>
-</tr>
-</tbody>
-</table>
-<p>Note that numbers other than 8, 16, 24, or 32 are allowed for the full CIDR notation.</p>
-</section>
-<section id="protocol">
-<h3>--protocol<a class="headerlink" href="#protocol" title="Link to this heading"></a></h3>
-<p>The type of scan to run. Upon cloning the repository the following strings are accepted:</p>
-<ul class="simple">
-<li><p>arp</p></li>
-<li><p>icmp</p></li>
-<li><p>tcp</p></li>
-<li><p>nmap</p></li>
-</ul>
-<p>More details for each scan type can be found at <a class="reference internal" href="help/scanning.html#scanning"><span class="std std-ref">How To Scan</span></a>.</p>
+  <section id="example-usage">
+<h1>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading"></a></h1>
+<p>This is a page of example uses of the code. For more information on what each flag does, and how it works, checkout the <code class="docutils literal notranslate"><span class="pre">How</span> <span class="pre">To</span> <span class="pre">Use</span></code> and <code class="docutils literal notranslate"><span class="pre">Kinds</span> <span class="pre">of</span> <span class="pre">Scans</span></code> pages on the side bar.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This flag is not required. If it is not provided, an arp scan is run.</p>
-<p>If an invalid value is passed in, the program will default to an arp scan.</p>
+<p>You may be required to run these as <code class="docutils literal notranslate"><span class="pre">sudo</span></code>. In that case, replace <code class="docutils literal notranslate"><span class="pre">python3</span></code> with <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">&lt;path_to_venv&gt;/&lt;venv_name&gt;/bin/python3</span></code>.</p>
 </div>
+<section id="basic-scan">
+<h2>Basic Scan<a class="headerlink" href="#basic-scan" title="Link to this heading"></a></h2>
+<section id="command">
+<h3>Command<a class="headerlink" href="#command" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">./</span><span class="n">analyzer</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="mf">192.168.11.50</span><span class="o">/</span><span class="mi">32</span>
+</pre></div>
+</div>
+<p>This scan does:</p>
+<ul class="simple">
+<li><p>An arp scan</p></li>
+<li><p>On the /32 network</p></li>
+<li><p>Of the IP address 192.168.11.50</p></li>
+</ul>
+</section>
+<section id="example-output">
+<h3>Example Output<a class="headerlink" href="#example-output" title="Link to this heading"></a></h3>
+<img alt="_images/basic.png" src="_images/basic.png" />
+</section>
 </section>
 <section id="selfscan">
-<h3>--selfscan<a class="headerlink" href="#selfscan" title="Link to this heading"></a></h3>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>This flag is required if ip is not chosen. You will get the help option if it is not included.</p>
+<h2>Selfscan<a class="headerlink" href="#selfscan" title="Link to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Only works on Linux or systems that have a <code class="docutils literal notranslate"><span class="pre">/proc</span></code> folder. Will NOT work on Windows or Mac. It will exit upon calling it</p>
 </div>
-<p>Performs a self scan to see what port are open and what processes are running on them, similar to <code class="docutils literal notranslate"><span class="pre">netstat</span> <span class="pre">-tupln</span></code>.</p>
-<img alt="_images/image.png" src="_images/image.png" />
-</section>
-<section id="timeout">
-<h3>--timeout<a class="headerlink" href="#timeout" title="Link to this heading"></a></h3>
-<p>This flag indicates the timeout time for each packet that is sent. The value passed in must be in seconds, and must be an integer value.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This flag is not required. The default timeout is 2 seconds.</p>
-</div>
-</section>
-<section id="traceroute">
-<h3>--traceroute<a class="headerlink" href="#traceroute" title="Link to this heading"></a></h3>
-<p>Runs a traceroute to every IP address given in the --ip flag. Shows the hops between you and each IP address.</p>
-<p>You can choose between two kinds of packets:</p>
-<ul class="simple">
-<li><p>icmp</p></li>
-<li><p>tcp</p></li>
-</ul>
-<p>To see what a traceroute does, go <a class="reference internal" href="help/scanning.html#tracert"><span class="std std-ref">here</span></a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This flag is not required. The default scan type is “icmp”.</p>
-</div>
-</section>
-<section id="traceroutehops">
-<h3>--traceroutehops<a class="headerlink" href="#traceroutehops" title="Link to this heading"></a></h3>
-<p>The number of hops for traceroute to run before it quits.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This flag is not required. The default number of hops is 30.</p>
-</div>
-</section>
-<section id="inverted-match">
-<h3>--inverted-match<a class="headerlink" href="#inverted-match" title="Link to this heading"></a></h3>
-<p>The way to blacklist an IP address. You give it a file with a list of single IP addresses to not scan, and it removes them from the list to scan.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This flag is not required. If a blocked IP is a router, it might still show up in the scan if it returns a packet.</p>
-</div>
-</section>
-<section id="debug">
-<h3>--debug<a class="headerlink" href="#debug" title="Link to this heading"></a></h3>
-<p>Dislays some extra debugging information.</p>
-<p>Example output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Network</span> <span class="n">Map</span> <span class="n">Contents</span><span class="p">]</span>
-<span class="n">IP</span><span class="p">:</span> <span class="mf">192.168.11.70</span>
-<span class="n">Object</span> <span class="n">IP</span><span class="p">:</span> <span class="mf">192.168.11.70</span>
-<span class="n">Open</span> <span class="n">Ports</span><span class="p">:</span> <span class="p">[</span><span class="mi">135</span><span class="p">,</span> <span class="mi">2179</span><span class="p">]</span>
-<span class="n">Closed</span> <span class="n">Ports</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span> <span class="mi">194</span><span class="p">,</span> <span class="mi">443</span><span class="p">]</span>
-<span class="n">Hops</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;192.168.11.70 (3.50 ms)&#39;</span><span class="p">]</span>
+<section id="id1">
+<h3>Command<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">./</span><span class="n">analyzer</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">s</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This flag is not required.</p>
-</div>
+<p>This scan does:</p>
+<ul class="simple">
+<li><p>A self scan showing listening ports on your machine, akin to <code class="docutils literal notranslate"><span class="pre">netstat</span> <span class="pre">-tupln</span></code>.</p></li>
+</ul>
 </section>
-<section id="top-ports">
-<h3>--top-ports<a class="headerlink" href="#top-ports" title="Link to this heading"></a></h3>
-<p>Scan the top <code class="docutils literal notranslate"><span class="pre">n</span></code> ports of the system. These top ports are taken from nmaps list of services found <a class="reference external" href="https://raw.githubusercontent.com/nmap/nmap/refs/heads/master/nmap-services">here</a> in nmap’s GitHub repo. The valid amounts for this flag include 10, 25, 100, 1000, and the ports are chosen based on the frequencies provided in the file.</p>
+<section id="id2">
+<h3>Example Output<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<img alt="_images/selfscan.png" src="_images/selfscan.png" />
+</section>
+</section>
+<section id="nmap-scan-with-port-scan">
+<h2>Nmap Scan with Port Scan<a class="headerlink" href="#nmap-scan-with-port-scan" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>Command<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">./</span><span class="n">analyzer</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="mf">192.168.11.50</span><span class="o">/</span><span class="mi">32</span> <span class="o">-</span><span class="n">p</span> <span class="n">nmap</span> <span class="o">-</span><span class="n">ps</span>
+</pre></div>
+</div>
+<p>This scan does:</p>
+<ul class="simple">
+<li><p>An Nmap like scan</p></li>
+<li><p>On the /32 network</p></li>
+<li><p>Of the IP address 192.168.11.50</p></li>
+<li><p>With a portscan of common ports</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Example Output<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<img alt="_images/nmap_portscan.png" src="_images/nmap_portscan.png" />
+</section>
+</section>
+<section id="nmap-scan-with-select-and-top-ports">
+<h2>Nmap Scan with Select and Top Ports<a class="headerlink" href="#nmap-scan-with-select-and-top-ports" title="Link to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This flag is not required. It does require an internet connection on first run since the file is not stored in this repository. After the first run, it will read from files located in <code class="docutils literal notranslate"><span class="pre">&lt;repo</span> <span class="pre">dir&gt;/services/</span></code> named as #services.json where # is the number of top ports.</p>
+<p>This is my favorite scan to run since it is fast, and still scans useful ports.</p>
+</div>
+<section id="id5">
+<h3>Command<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">./</span><span class="n">analyzer</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="mf">192.168.11.50</span><span class="o">/</span><span class="mi">32</span> <span class="o">-</span><span class="n">p</span> <span class="n">nmap</span> <span class="o">-</span><span class="n">ps</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span> <span class="o">--</span><span class="n">top</span><span class="o">-</span><span class="n">ports</span> <span class="mi">25</span>
+</pre></div>
+</div>
+<p>This scan does:</p>
+<ul class="simple">
+<li><p>An Nmap like scan</p></li>
+<li><p>On the /32 network</p></li>
+<li><p>Of the IP address 192.168.11.50</p></li>
+<li><p>With a portscan of port 1 and 2-3 (2 through 3 inclusive)</p></li>
+<li><p>And with Nmap top 25 ports (After ran, can be found in <code class="docutils literal notranslate"><span class="pre">utilities/services/25services.json</span></code>, uses Nmaps <code class="docutils literal notranslate"><span class="pre">nmap-services</span></code> file to get this data)</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>Example Output<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<img alt="_images/nmap_topscan.png" src="_images/nmap_topscan.png" />
+</section>
+</section>
+<section id="nmap-scan-with-port-scan-and-traceroute">
+<h2>Nmap Scan with Port Scan and Traceroute<a class="headerlink" href="#nmap-scan-with-port-scan-and-traceroute" title="Link to this heading"></a></h2>
+<section id="id7">
+<h3>Command<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">./</span><span class="n">analyzer</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="mf">8.8.8.8</span> <span class="o">-</span><span class="n">p</span> <span class="n">nmap</span> <span class="o">-</span><span class="n">ps</span> <span class="o">-</span><span class="n">tr</span> <span class="n">icmp</span> <span class="o">-</span><span class="n">trh</span> <span class="mi">20</span>
+</pre></div>
+</div>
+<p>This scan does:</p>
+<ul class="simple">
+<li><p>An Nmap like scan</p></li>
+<li><p>On the IP address 8.8.8.8</p></li>
+<li><p>With a portscan of common ports</p></li>
+<li><p>And performs a traceroute to the IP address</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>Example Output<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<img alt="_images/nmap_traceroute.png" src="_images/nmap_traceroute.png" />
+</section>
+</section>
+<section id="nmap-scan-with-select-ports-and-top-ports-and-service-scan">
+<h2>Nmap Scan with Select Ports and Top Ports and Service Scan<a class="headerlink" href="#nmap-scan-with-select-ports-and-top-ports-and-service-scan" title="Link to this heading"></a></h2>
+<section id="id9">
+<h3>Command<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">./</span><span class="n">analyzer</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="mf">192.168.11.50</span><span class="o">/</span><span class="mi">32</span> <span class="o">-</span><span class="n">p</span> <span class="n">nmap</span> <span class="o">-</span><span class="n">ps</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span> <span class="o">--</span><span class="n">top</span><span class="o">-</span><span class="n">ports</span> <span class="mi">25</span> <span class="o">-</span><span class="n">sV</span>
+</pre></div>
+</div>
+<p>This scan does:</p>
+<ul class="simple">
+<li><p>An Nmap like scan</p></li>
+<li><p>On the /32 network</p></li>
+<li><p>Of the IP address 192.168.11.50</p></li>
+<li><p>With a portscan of port 1 and 2-3 (2 through 3 inclusive)</p></li>
+<li><p>And with Nmap top 25 ports (After ran, can be found in <code class="docutils literal notranslate"><span class="pre">utilities/services/25services.json</span></code>, uses Nmaps <code class="docutils literal notranslate"><span class="pre">nmap-services</span></code> file to get this data)</p></li>
+<li><p>Attempts to identify the actual service running on the port</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3>Example Output<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<img alt="_images/nmap_servicescan.png" src="_images/nmap_servicescan.png" />
+</section>
+</section>
+<section id="same-scan-as-above-with-os-detection-and-cve-detection">
+<h2>Same Scan as Above with OS Detection and CVE Detection<a class="headerlink" href="#same-scan-as-above-with-os-detection-and-cve-detection" title="Link to this heading"></a></h2>
+<section id="id11">
+<h3>Command<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">./</span><span class="n">analyzer</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="mf">192.168.11.50</span><span class="o">/</span><span class="mi">32</span> <span class="o">-</span><span class="n">p</span> <span class="n">nmap</span> <span class="o">-</span><span class="n">ps</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span> <span class="o">--</span><span class="n">top</span><span class="o">-</span><span class="n">ports</span> <span class="mi">25</span> <span class="o">-</span><span class="n">sV</span> <span class="o">-</span><span class="n">o</span> <span class="o">-</span><span class="n">c</span>
+</pre></div>
+</div>
+<p>This scan does:</p>
+<ul class="simple">
+<li><p>An Nmap like scan</p></li>
+<li><p>On the /32 network</p></li>
+<li><p>Of the IP address 192.168.11.50</p></li>
+<li><p>With a portscan of port 1 and 2-3 (2 through 3 inclusive)</p></li>
+<li><p>And with Nmap top 25 ports (After ran, can be found in <code class="docutils literal notranslate"><span class="pre">utilities/services/25services.json</span></code>, uses Nmaps <code class="docutils literal notranslate"><span class="pre">nmap-services</span></code> file to get this data)</p></li>
+<li><p>Attempts to identify the actual service running on the port</p></li>
+<li><p>Attempts to identify the Operating system</p></li>
+<li><p>Attemps to find vulnerabilities on found service versions.</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>Example Output<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<img alt="_images/nmap_allscan.png" src="_images/nmap_allscan.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this image it was not able to find a vulnerability, but the scan was run.</p>
 </div>
 </section>
 </section>
@@ -262,7 +293,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="help/scanning.html" class="btn btn-neutral float-right" title="Kinds of Scans" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="flags.html" class="btn btn-neutral float-right" title="How To Use" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

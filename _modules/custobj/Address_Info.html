@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>custobj.Address_Info &mdash; CYBR487 Lab1 2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=60dbed4a"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CYBR487 Lab1
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">How To Use</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../help/scanning.html">Kinds of Scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/index.html">Code Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CYBR487 Lab1</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">custobj.Address_Info</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for custobj.Address_Info</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;The class for custom IP tracking data</span>
+
+<span class="sd">Tracks:</span>
+<span class="sd">- The IP address</span>
+<span class="sd">- The hops from that IP address</span>
+<span class="sd">- The open ports</span>
+<span class="sd">- The closed ports</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">custobj.hop</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hop</span>
+
+<div class="viewcode-block" id="Address_Info">
+<a class="viewcode-back" href="../../modules/custobj.html#custobj.Address_Info.Address_Info">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Address_Info</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A Class for tracking information about an IP address</span>
+
+<span class="sd">    - Hops from this IP</span>
+<span class="sd">    - Open ports</span>
+<span class="sd">    - Closed ports</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ipaddr</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a new Address_Info with the given IP, and initializes the object</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ipaddr (str): The IP address for this object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ipaddr</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ip</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ip</span> <span class="o">=</span> <span class="n">ipaddr</span> 
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hops</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># List of hop objects</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">oports</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Open scanned ports</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cports</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Open closed ports</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">services</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># The services running on each port {port: service} Use as alternative to oports</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">os_name</span> <span class="o">=</span> <span class="kc">None</span>          <span class="c1"># Add these</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">os_confidence</span> <span class="o">=</span> <span class="mi">0</span>       <span class="c1"># Add these</span>
+
+<div class="viewcode-block" id="Address_Info.set_os_info">
+<a class="viewcode-back" href="../../modules/custobj.html#custobj.Address_Info.Address_Info.set_os_info">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_os_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">confidence</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update OS detection info if confidence is higher</span>
+<span class="sd">        Args:</span>
+<span class="sd">            os_name (str): Detected OS name</span>
+<span class="sd">            confidence (int): Confidence level (0-100)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">confidence</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_confidence</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">os_name</span> <span class="o">=</span> <span class="n">os_name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">os_confidence</span> <span class="o">=</span> <span class="n">confidence</span></div>
+
+
+<div class="viewcode-block" id="Address_Info.get_os_info">
+<a class="viewcode-back" href="../../modules/custobj.html#custobj.Address_Info.Address_Info.get_os_info">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_os_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the detected OS and confidence</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple[str, int]: (os_name, confidence)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">os_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_confidence</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">()</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">Traceroute Hops: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_hops</span><span class="si">}</span><span class="se">\n</span><span class="s2">Open Ports: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">oports</span><span class="si">}</span><span class="se">\n</span><span class="s2">Closed Ports:p </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cports</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<div class="viewcode-block" id="Address_Info.ip">
+<a class="viewcode-back" href="../../modules/custobj.html#custobj.Address_Info.Address_Info.ip">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ip</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the IP address that was passed in before.</span>
+<span class="sd">        </span>
+<span class="sd">        Use instead of the internal variable to prevent writing to it, the passed in </span>
+<span class="sd">        IP should be considered final.</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            str: The IP address that was passed in</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ip</span></div>
+
+    
+<div class="viewcode-block" id="Address_Info.add_hop">
+<a class="viewcode-back" href="../../modules/custobj.html#custobj.Address_Info.Address_Info.add_hop">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_hop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hop</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rtt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a hop with it&#39;s round trip time to the list</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            hop (str): The IP address of the hop</span>
+<span class="sd">            rtt (float): The Round Trip time for the packet</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Hop</span><span class="p">(</span><span class="n">hop</span><span class="p">,</span> <span class="n">rtt</span><span class="p">))</span></div>
+
+    
+<div class="viewcode-block" id="Address_Info.hops">
+<a class="viewcode-back" href="../../modules/custobj.html#custobj.Address_Info.Address_Info.hops">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">hops</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Hop</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the list of hops and round trip times</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (list[Hop]): A list of Hop objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hops</span></div>
+
+    
+<div class="viewcode-block" id="Address_Info.scanned_port">
+<a class="viewcode-back" href="../../modules/custobj.html#custobj.Address_Info.Address_Info.scanned_port">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scanned_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">open</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Appends to a list whether the scanned port was open or closed.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            port (int): The port to append</span>
+<span class="sd">            open (bool): Whether the port was open or closed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">open</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">oports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">port</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Corey Basden, Isaiah Bessire, Patrick Maas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+custobj package
+===============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   custobj.tree
+
+Submodules
+----------
+
+custobj.Address\_Info module
+----------------------------
+
+.. automodule:: custobj.Address_Info
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+custobj.hop module
+------------------
+
+.. automodule:: custobj.hop
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+custobj.port module
+-------------------
+
+.. automodule:: custobj.port
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: custobj
+   :members:
+   :show-inheritance:
+   :undoc-members:

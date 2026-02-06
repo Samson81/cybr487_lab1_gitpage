@@ -1,161 +1,209 @@
-How To Use
-==========
+.. usage.rst
 
-This page contains information on how to use the program. 
+Example Usage
+=============
 
-Network Scan
-------------
+This is a page of example uses of the code. For more information on what each flag does, and how it works, checkout the ``How To Use`` and ``Kinds of Scans`` pages on the side bar.
 
-To see the help for the program, type ``python3 analyzer.py`` inside of the :ref:`virtual environment <virt-env>`.
+.. note::
+
+    You may be required to run these as ``sudo``. In that case, replace ``python3`` with ``sudo <path_to_venv>/<venv_name>/bin/python3``.
+
+----------
+Basic Scan
+----------
+
+^^^^^^^
+Command
+^^^^^^^
 
 ::
 
-   usage: analyzer.py [options]
+    python3 ./analyzer.py -i 192.168.11.50/32
 
-    options:
-    -h, --help                            show this help message and exit
-    -i, --ip IP                           The IP range to scan
-    -p, --protocol PROTOCOL               The type of scan to perform. Default "arp"
-    -s, --selfscan                        Scans the user's /proc system
-    -t, --timeout TIMEOUT                 The time in seconds to wait for a packet. Default 2 seconds
-    -ps, --portscan [PORTSCAN]            Perform a portscan. Specify ports or leave blank for common ports.
-    -tr, --traceroute {icmp,tcp}          Perform traceroute on discovered hosts. Options: icmp, tcp
-    -trh, --traceroutehops TRACEROUTEHOPS Max number of hops for traceroute
-    -v, --inverted-match INVERTED_MATCH   Takes in a file of IP addresses to NOT scan
-    -d, --debug                           Show extra debug info
-    --top-ports {all,0,10,25,100,1000}    Scan the top x ports on every machine. Options: all, 10, 25, 100, 10000
+This scan does:
 
-^^^^^^^^
-\-\-help
-^^^^^^^^
-Displays the help message shown above.
-
-^^^^^^
-\-\-ip
-^^^^^^
-.. attention::
-    This flag is required if selfscan is not chosen. You will get the help option if it is not included.
-
-The range to scan. There are several inputs that can be accepted. Below is an table of Examples for what each passed in value converts to:
-
-+-----------------+--------------------+
-| Passed In       | Converted To       |
-+=================+====================+
-| 192             | 192.0.0.0/8        |
-+-----------------+--------------------+
-| 192.168         | 192.168.0.0/16     |
-+-----------------+--------------------+
-| 192.168.1       | 192.168.1.0/24     | 
-+-----------------+--------------------+
-| 192.168.1.1     | 192.168.1.1/32     |
-+-----------------+--------------------+
-| 192.168.1.1/8   | 192.0.0.0/8        |
-+-----------------+--------------------+
-| 192.168.1.1/16  | 192.168.0.0/16     |
-+-----------------+--------------------+
-| 192.168.1.1/24  | 192.168.1.0/24     |
-+-----------------+--------------------+
-| 192.168.1.1/32  | 192.168.1.1/32     |
-+-----------------+--------------------+
-
-Note that numbers other than 8, 16, 24, or 32 are allowed for the full CIDR notation.
-
-^^^^^^^^^^^^
-\-\-protocol
-^^^^^^^^^^^^
-The type of scan to run. Upon cloning the repository the following strings are accepted:
-
-- arp
-- icmp
-- tcp
-- nmap
-
-More details for each scan type can be found at :ref:`How To Scan <scanning>`.
-
-.. note::
-    This flag is not required. If it is not provided, an arp scan is run.
-
-    If an invalid value is passed in, the program will default to an arp scan.
-
-^^^^^^^^^^^^
-\-\-selfscan
-^^^^^^^^^^^^
-
-.. attention::
-    This flag is required if ip is not chosen. You will get the help option if it is not included.
-
-Performs a self scan to see what port are open and what processes are running on them, similar to ``netstat -tupln``.
-
-.. image:: images/image.png
-
-^^^^^^^^^^^
-\-\-timeout
-^^^^^^^^^^^
-This flag indicates the timeout time for each packet that is sent. The value passed in must be in seconds, and must be an integer value.
-
-.. note::
-    This flag is not required. The default timeout is 2 seconds.
+- An arp scan
+- On the /32 network
+- Of the IP address 192.168.11.50
 
 ^^^^^^^^^^^^^^
-\-\-traceroute
+Example Output
 ^^^^^^^^^^^^^^
 
-Runs a traceroute to every IP address given in the \-\-ip flag. Shows the hops between you and each IP address.
-
-You can choose between two kinds of packets:
-
-- icmp
-- tcp
-
-To see what a traceroute does, go :ref:`here <tracert>`.
-
-.. note::
-    This flag is not required. The default scan type is "icmp".
+.. image:: images/basic.png
 
 
-^^^^^^^^^^^^^^^^^^
-\-\-traceroutehops
-^^^^^^^^^^^^^^^^^^
+--------
+Selfscan
+--------
 
-The number of hops for traceroute to run before it quits.
+.. warning::
+    Only works on Linux or systems that have a ``/proc`` folder. Will NOT work on Windows or Mac. It will exit upon calling it
 
-.. note::
-    This flag is not required. The default number of hops is 30.
 
-^^^^^^^^^^^^^^^^^^
-\-\-inverted-match
-^^^^^^^^^^^^^^^^^^
-
-The way to blacklist an IP address. You give it a file with a list of single IP addresses to not scan, and it removes them from the list to scan. 
-
-.. note::
-    This flag is not required. If a blocked IP is a router, it might still show up in the scan if it returns a packet.
-
-^^^^^^^^^
-\-\-debug
-^^^^^^^^^
-
-Dislays some extra debugging information.
-
-Example output:
+^^^^^^^
+Command
+^^^^^^^
 
 ::
 
-    [Network Map Contents]
-    IP: 192.168.11.70
-    Object IP: 192.168.11.70
-    Open Ports: [135, 2179]
-    Closed Ports: [20, 21, 22, 23, 25, 53, 80, 110, 119, 123, 143, 161, 194, 443]
-    Hops: ['192.168.11.70 (3.50 ms)']
+    python3 ./analyzer.py -s
+
+This scan does:
+
+- A self scan showing listening ports on your machine, akin to ``netstat -tupln``.
+
+^^^^^^^^^^^^^^
+Example Output
+^^^^^^^^^^^^^^
+
+.. image:: images/selfscan.png
+
+
+------------------------
+Nmap Scan with Port Scan
+------------------------
+
+^^^^^^^
+Command
+^^^^^^^
+
+::
+
+    python3 ./analyzer.py -i 192.168.11.50/32 -p nmap -ps
+
+This scan does:
+
+- An Nmap like scan
+- On the /32 network
+- Of the IP address 192.168.11.50
+- With a portscan of common ports
+
+
+^^^^^^^^^^^^^^
+Example Output
+^^^^^^^^^^^^^^
+
+.. image:: images/nmap_portscan.png
+
+
+-----------------------------------
+Nmap Scan with Select and Top Ports
+-----------------------------------
 
 .. note::
-    This flag is not required.
+    
+    This is my favorite scan to run since it is fast, and still scans useful ports.
 
-^^^^^^^^^^^^^
-\-\-top-ports
-^^^^^^^^^^^^^
+^^^^^^^
+Command
+^^^^^^^
 
-Scan the top ``n`` ports of the system. These top ports are taken from nmaps list of services found `here <https://raw.githubusercontent.com/nmap/nmap/refs/heads/master/nmap-services>`__ in nmap's GitHub repo. The valid amounts for this flag include 10, 25, 100, 1000, and the ports are chosen based on the frequencies provided in the file.
+::
+
+    python3 ./analyzer.py -i 192.168.11.50/32 -p nmap -ps 1,2-3 --top-ports 25
+
+This scan does:
+
+- An Nmap like scan
+- On the /32 network
+- Of the IP address 192.168.11.50
+- With a portscan of port 1 and 2-3 (2 through 3 inclusive)
+- And with Nmap top 25 ports (After ran, can be found in ``utilities/services/25services.json``, uses Nmaps ``nmap-services`` file to get this data)
+
+^^^^^^^^^^^^^^
+Example Output
+^^^^^^^^^^^^^^
+
+.. image:: images/nmap_topscan.png
+
+
+
+---------------------------------------
+Nmap Scan with Port Scan and Traceroute
+---------------------------------------
+
+^^^^^^^
+Command
+^^^^^^^
+
+::
+
+    python3 ./analyzer.py -i 8.8.8.8 -p nmap -ps -tr icmp -trh 20
+
+This scan does:
+
+- An Nmap like scan
+- On the IP address 8.8.8.8
+- With a portscan of common ports
+- And performs a traceroute to the IP address
+
+^^^^^^^^^^^^^^
+Example Output
+^^^^^^^^^^^^^^
+
+.. image:: images/nmap_traceroute.png
+
+
+----------------------------------------------------------
+Nmap Scan with Select Ports and Top Ports and Service Scan
+----------------------------------------------------------
+
+
+^^^^^^^
+Command
+^^^^^^^
+
+::
+
+    python3 ./analyzer.py -i 192.168.11.50/32 -p nmap -ps 1,2-3 --top-ports 25 -sV
+
+This scan does:
+
+- An Nmap like scan
+- On the /32 network
+- Of the IP address 192.168.11.50
+- With a portscan of port 1 and 2-3 (2 through 3 inclusive)
+- And with Nmap top 25 ports (After ran, can be found in ``utilities/services/25services.json``, uses Nmaps ``nmap-services`` file to get this data)
+- Attempts to identify the actual service running on the port
+
+^^^^^^^^^^^^^^
+Example Output
+^^^^^^^^^^^^^^
+
+.. image:: images/nmap_servicescan.png
+
+
+------------------------------------------------------
+Same Scan as Above with OS Detection and CVE Detection
+------------------------------------------------------
+
+
+^^^^^^^
+Command
+^^^^^^^
+
+::
+
+    python3 ./analyzer.py -i 192.168.11.50/32 -p nmap -ps 1,2-3 --top-ports 25 -sV -o -c
+
+This scan does:
+
+- An Nmap like scan
+- On the /32 network
+- Of the IP address 192.168.11.50
+- With a portscan of port 1 and 2-3 (2 through 3 inclusive)
+- And with Nmap top 25 ports (After ran, can be found in ``utilities/services/25services.json``, uses Nmaps ``nmap-services`` file to get this data)
+- Attempts to identify the actual service running on the port
+- Attempts to identify the Operating system
+- Attemps to find vulnerabilities on found service versions.
+
+^^^^^^^^^^^^^^
+Example Output
+^^^^^^^^^^^^^^
+
+.. image:: images/nmap_allscan.png
 
 .. note::
-    This flag is not required. It does require an internet connection on first run since the file is not stored in this repository. After the first run, it will read from files located in ``<repo dir>/services/`` named as #services.json where # is the number of top ports.
+    In this image it was not able to find a vulnerability, but the scan was run.

@@ -19,8 +19,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="port_scanner module" href="port_scanner.html" />
-    <link rel="prev" title="netscan module" href="netscan.html" /> 
+    <link rel="next" title="report package" href="report.html" />
+    <link rel="prev" title="custobj.tree package" href="custobj.tree.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,7 +48,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../usage.html">How To Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Example Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Flags</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../flags.html">How To Use</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Help</span></p>
 <ul>
@@ -58,8 +62,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Code Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="netscan.html">netscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custobj.html">custobj package</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">parsing package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-parsing.ip_parser">parsing.ip_parser module</a><ul>
@@ -74,13 +77,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-parsing">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="port_scanner.html">port_scanner module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="report.html">report module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scan.html">scan package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="selfscan.html">selfscan module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="threads.html">threads package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="traceroute.html">traceroute module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html">report package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scans.html">scans package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html">visualization package</a></li>
 </ul>
 </li>
 </ul>
@@ -163,6 +162,7 @@ and normalizes it to CIDR notation.</p>
 <dt class="sig sig-object py" id="parsing.port_parser.Port_Parse">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">parsing.port_parser.</span></span><span class="sig-name descname"><span class="pre">Port_Parse</span></span><a class="reference internal" href="../_modules/parsing/port_parser.html#Port_Parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#parsing.port_parser.Port_Parse" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The object for parsing the common services file given by NMAP</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="parsing.port_parser.Port_Parse.all">
 <span class="sig-name descname"><span class="pre">all</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></span><a class="headerlink" href="#parsing.port_parser.Port_Parse.all" title="Link to this definition"></a></dt>
@@ -260,8 +260,8 @@ If top is a specified value other than 0, than it scans the following:</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="netscan.html" class="btn btn-neutral float-left" title="netscan module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="port_scanner.html" class="btn btn-neutral float-right" title="port_scanner module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="custobj.tree.html" class="btn btn-neutral float-left" title="custobj.tree package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="report.html" class="btn btn-neutral float-right" title="report package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

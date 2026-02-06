@@ -1,0 +1,220 @@
+.. flags.rst
+
+How To Use
+==========
+
+This page contains information on how to use the program. 
+
+Network Scan
+------------
+
+To see the help for the program, type ``python3 analyzer.py`` inside of the :ref:`virtual environment <virt-env>`.
+
+::
+
+    usage: analyzer.py [options]
+
+    options:
+    -h, --help                                          show this help message and exit
+    -i, --ip IP                                         The IP range to scan
+    -p, --protocol PROTOCOL                             The type of scan to perform. Default "arp"
+    -l, --list                                          Lists the valid protocols to use, and exits.
+    -s, --selfscan                                      Scans the user's /proc system
+    -t, --timeout TIMEOUT                               The time in seconds to wait for a packet. Default 2 seconds
+    -ps, --portscan [PORTSCAN]                          Perform a portscan. Specify ports or leave blank for common ports.
+    -tr, --traceroute {icmp,tcp}                        Perform traceroute on discovered hosts. Options: icmp, tcp
+    -trh, --traceroutehops TRACEROUTEHOPS               Max number of hops for traceroute
+    -v, --inverted-match INVERTED_MATCH                 Takes in a file of IP addresses to NOT scan
+    -d, --debug                                         Show extra debug info, and creates a debug pickle
+    --top-ports {all,0,10,25,100,1000}                  Scan the top x ports on every machine. Options: all, 10, 25, 100, 1000
+    -sV, --service-scan                                 Attempts to Identify the service running on each port
+    -sVt, --service-scan-timeout SERVICE_SCAN_TIMEOUT   The time in seconds to wait for a packet. Default 5 seconds
+    -c, --cve                                           Check found services for known vulnerabilities.
+    -o, --os                                            Try to determine the OS of found hosts.
+
+^^^^^^^^
+\-\-help
+^^^^^^^^
+Displays the help message shown above.
+
+^^^^^^
+\-\-ip
+^^^^^^
+.. attention::
+    This flag is required if selfscan is not chosen. You will get the help option if it is not included.
+
+The range to scan. There are several inputs that can be accepted. Below is an table of Examples for what each passed in value converts to:
+
++-----------------+--------------------+
+| Passed In       | Converted To       |
++=================+====================+
+| 192             | 192.0.0.0/8        |
++-----------------+--------------------+
+| 192.168         | 192.168.0.0/16     |
++-----------------+--------------------+
+| 192.168.1       | 192.168.1.0/24     | 
++-----------------+--------------------+
+| 192.168.1.1     | 192.168.1.1/32     |
++-----------------+--------------------+
+| 192.168.1.1/8   | 192.0.0.0/8        |
++-----------------+--------------------+
+| 192.168.1.1/16  | 192.168.0.0/16     |
++-----------------+--------------------+
+| 192.168.1.1/24  | 192.168.1.0/24     |
++-----------------+--------------------+
+| 192.168.1.1/32  | 192.168.1.1/32     |
++-----------------+--------------------+
+
+Note that numbers other than 8, 16, 24, or 32 are allowed for the full CIDR notation.
+
+^^^^^^^^^^^^
+\-\-protocol
+^^^^^^^^^^^^
+The type of scan to run. Upon cloning the repository the following strings are accepted:
+
+- arp
+- icmp
+- tcp
+- nmap
+
+More details for each scan type can be found at :ref:`How To Scan <scanning>`.
+
+.. note::
+    This flag is not required. If it is not provided, an arp scan is run.
+
+    If an invalid value is passed in, the program will default to an arp scan.
+
+
+
+^^^^^^^^
+\-\-list
+^^^^^^^^
+
+Lists the loaded plugins for the protocol above:
+
+::
+
+    Loaded Plugins:
+    - arp
+    - icmp
+    - nmap
+    - tcp
+
+^^^^^^^^^^^^
+\-\-selfscan
+^^^^^^^^^^^^
+
+.. attention::
+    This flag is required if ip is not chosen. You will get the help option if it is not included.
+
+Performs a self scan to see what port are open and what processes are running on them, similar to ``netstat -tupln``.
+
+.. image:: images/image.png
+
+^^^^^^^^^^^
+\-\-timeout
+^^^^^^^^^^^
+This flag indicates the timeout time for each packet that is sent. The value passed in must be in seconds, and must be an integer value.
+
+.. note::
+    This flag is not required. The default timeout is 2 seconds.
+
+^^^^^^^^^^^^^^
+\-\-traceroute
+^^^^^^^^^^^^^^
+
+Runs a traceroute to every IP address given in the \-\-ip flag. Shows the hops between you and each IP address.
+
+You can choose between two kinds of packets:
+
+- icmp
+- tcp
+
+To see what a traceroute does, go :ref:`here <tracert>`.
+
+.. note::
+    This flag is not required. The default scan type is "icmp".
+
+
+^^^^^^^^^^^^^^^^^^
+\-\-traceroutehops
+^^^^^^^^^^^^^^^^^^
+
+The number of hops for traceroute to run before it quits.
+
+.. note::
+    This flag is not required. The default number of hops is 30.
+
+^^^^^^^^^^^^^^^^^^
+\-\-inverted-match
+^^^^^^^^^^^^^^^^^^
+
+The way to blacklist an IP address. You give it a file with a list of single IP addresses to not scan, and it removes them from the list to scan. 
+
+.. note::
+    This flag is not required. If a blocked IP is a router, it might still show up in the scan if it returns a packet.
+
+^^^^^^^^^
+\-\-debug
+^^^^^^^^^
+
+Dislays some extra debugging information.
+
+Example output:
+
+::
+
+    [Network Map Contents]
+    IP: 192.168.11.70
+    Object IP: 192.168.11.70
+    Open Ports: [135, 2179]
+    Closed Ports: [20, 21, 22, 23, 25, 53, 80, 110, 119, 123, 143, 161, 194, 443]
+    Hops: ['192.168.11.70 (3.50 ms)']
+
+.. note::
+    This flag is not required.
+
+^^^^^^^^^^^^^
+\-\-top-ports
+^^^^^^^^^^^^^
+
+Scan the top ``n`` ports of the system. These top ports are taken from nmaps list of services found `here <https://raw.githubusercontent.com/nmap/nmap/refs/heads/master/nmap-services>`__ in nmap's GitHub repo. The valid amounts for this flag include 10, 25, 100, 1000, and the ports are chosen based on the frequencies provided in the file.
+
+.. note::
+    This flag is not required. It does require an internet connection on first run since the file is not stored in this repository. After the first run, it will read from files located in ``<repo dir>/services/`` named as #services.json where # is the number of top ports.
+
+
+^^^^^^^^^^^^^^^^
+\-\-service-scan
+^^^^^^^^^^^^^^^^
+
+Attempts to identify the service on a port that is open. For example if port 53 on a machine is open, the default display shows:
+
+::
+    [Port 53/tcp: OPEN] (DNS)
+
+If, for example, they are actually running OpenSSH, the service scan can pick this up:
+
+::
+    [Port 53/tcp: OPEN] (OpenSSH 10.2 (SSH v2.0) (Confidence: 99%))
+
+^^^^^^^^^^^^^^^^^^^^^^^^
+\-\-service-scan-timeout
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The timeout time for the service scan. It generally waits longer than other scans, so it needs it's own timeout.
+
+^^^^^^
+\-\-os
+^^^^^^
+
+Attempt to identify the OS running on the Machine using commonly known fingerprinting techniques. `Link to nmap's book on the topic <https://nmap.org/book/osdetect-methods.html#osdetect-ss>`__.
+
+^^^^^^^
+\-\-cve
+^^^^^^^
+
+If a service is identified on a port, this attempts to find CVE's connected to that service. 
+
+.. note::
+    This requires a service name and version to work. It will work with OpenSSH 6.6.1p1 (Ubuntu-2ubuntu2.10) (SSH v2.0), but not telnetd (Linux) for example.

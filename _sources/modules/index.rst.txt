@@ -5,13 +5,8 @@ Code Documentation
    :maxdepth: 4
 
    analyzer
-   ip_parser
-   netscan
+   custobj
    parsing
-   port_scanner
    report
-   scan
-   selfscan
-   threads
-   traceroute
-   utils
+   scans
+   visualization

@@ -25,6 +25,12 @@ Link to the style guide that we used found `here <https://google.github.io/style
 
 .. toctree::
    :maxdepth: 3
+   :caption: Flags
+
+   flags
+
+.. toctree::
+   :maxdepth: 3
    :caption: Help
 
    help/scanning.rst
