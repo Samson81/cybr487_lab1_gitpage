@@ -1,3 +1,5 @@
+.. getting_started.rst
+
 Getting Started
 ===============
 
