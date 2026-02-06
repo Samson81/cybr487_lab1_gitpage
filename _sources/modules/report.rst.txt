@@ -1,5 +1,67 @@
-report module
-=============
+report package
+==============
+
+Submodules
+----------
+
+report.all module
+-----------------
+
+.. automodule:: report.all
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+report.print\_host module
+-------------------------
+
+.. automodule:: report.print_host
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+report.print\_os module
+-----------------------
+
+.. automodule:: report.print_os
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+report.print\_portscan module
+-----------------------------
+
+.. automodule:: report.print_portscan
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+report.print\_selfscan module
+-----------------------------
+
+.. automodule:: report.print_selfscan
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+report.print\_traceroute module
+-------------------------------
+
+.. automodule:: report.print_traceroute
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+report.report module
+--------------------
+
+.. automodule:: report.report
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
 
 .. automodule:: report
    :members:

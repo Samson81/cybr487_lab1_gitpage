@@ -1,0 +1,192 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scans.port_scan.port_identify &mdash; CYBR487 Lab1 2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=60dbed4a"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CYBR487 Lab1
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">How To Use</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../help/scanning.html">Kinds of Scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/index.html">Code Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CYBR487 Lab1</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">scans.port_scan.port_identify</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for scans.port_scan.port_identify</h1><div class="highlight"><pre>
+<span></span>&quot;&quot;&quot;Identification of services running on a port
+&quot;&quot;&quot;
+import re
+
+<div class="viewcode-block" id="identify">
+<a class="viewcode-back" href="../../../modules/scans.port_scan.html#scans.port_scan.port_identify.identify">[docs]</a>
+def identify(data: bytes) -&gt; str | None:
+    &quot;&quot;&quot;Attempts to identify a service running on a port based on what it returns.
+
+    Services that can be detected:
+    - SSH (Any that follow RFC 4253 and those that don&#39;t)
+    - FTP (vsFTPd, FileZilla and others)
+    - HTTP
+    - Telnet (Only inetutils version)
+    - MySQL (Most likely only MariaDB)
+    - SMTP
+
+    Args:
+        data (bytes): The data returned from the socket connection
+    
+    Returns:
+        (str | None): The identifying information of the service, or None if no regex exists for the service
+    &quot;&quot;&quot;
+    match data:
+        case _ if (ssh := re.match(rb&quot;^SSH-(?P&lt;sshver&gt;[\d.]+)-(?P&lt;service&gt;.+)_(?P&lt;version&gt;[^\s]+\d)\s?(?P&lt;comment&gt;.*)?\r\n&quot;, data)): # SSH check
+            service = ssh.group(&quot;service&quot;).decode()
+            version = ssh.group(&quot;version&quot;).decode()
+            sshver = ssh.group(&quot;sshver&quot;).decode()
+            if ssh.group(&quot;comment&quot;):
+                comment = f&quot;({ssh.group(&quot;comment&quot;).decode()}) &quot;
+            else:
+                comment = &quot;&quot;
+            return f&quot;{service} {version} {comment}(SSH v{sshver}) (Confidence: 99%)&quot;
+
+
+        case _ if (ssh := re.match(rb&quot;.*(?P&lt;service&gt;(SSH|ssh)).*\r\n&quot;, data)): # Base SSH banner check, can be spoofed
+            service = ssh.group.decode()
+            return f&quot;{service} (Confidence: Low)&quot;
+
+        case _ if (ftp := re.match(rb&quot;^220[- ](?:\((?P&lt;service&gt;(vsFTPd))\s(?P&lt;version&gt;.+)\))\r\n&quot;, data)): # Check for vsFTPd
+            service = ftp.group(&quot;service&quot;)
+            version = ftp.group(&quot;version&quot;)
+            return f&quot;{service.decode()} {version.decode()} (Confidence: 99%)&quot;
+
+        case _ if (ftp := re.match(rb&quot;220[- ](?P&lt;service&gt;FileZilla) Server (?P&lt;version&gt;.+)\r\n220[- ].*https://filezilla-project.org/\r\n&quot;, data)): # Check for FileZilla
+            service = ftp.group(&quot;service&quot;)
+            version = ftp.group(&quot;version&quot;)
+            return f&quot;{service.decode()} {version.decode()} (Confidence: 99%)&quot;
+
+        case _ if (ftp := re.match(rb&quot;220[- ].*(?P&lt;service&gt;(ftp|FTP)).*\r\n&quot;, data)): # Base FTP banner check, can be spoofed
+            service = ftp.group(&quot;service&quot;)
+            return f&quot;{service.decode()} (Confidence: Low)&quot;
+
+        case _ if (http := re.match(rb&quot;^HTTP/\d+\.\d+ \d{3}[\s\S]*?Server:\s(?P&lt;service&gt;.+?)/(?P&lt;version&gt;\d+(?:\.\d+)+)(?:\s\(?(?P&lt;os&gt;.+?)\)?\r\n)?&quot;, data)): # HTTP server
+            service = http.group(&quot;service&quot;).decode()
+            version = http.group(&quot;version&quot;).decode()
+            if http.group(&quot;os&quot;):
+                os = &quot;(&quot; + http.group(&quot;os&quot;).decode() + &quot;)&quot;
+            else:
+                os = &quot;&quot;
+            return f&quot;{service} {version} {os} (Confidence: 90%)&quot;
+        
+        case _ if (telnet := re.match(rb&quot;\xff\xfd\x18\xff\xfd \xff\xfd\#\xff\xfd&#39;\xff\xfd\$&quot;, data)): # Telnet
+            return &quot;telnetd (Linux) (Confidence: 99%)&quot;
+
+        case _ if (mysql := re.match(rb&quot;.\x00\x00\x00\xff.{2}Host.*is not allowed to connect to this (?P&lt;service&gt;.+) server&quot;, data)): # MySQL database
+            service = mysql.group(&quot;service&quot;).decode()
+            return f&quot;{service} (Confidence: 90%)&quot;
+
+        case _ if (smtp := re.match(rb&quot;220[- ].*?(?P&lt;hostname&gt;.+\..+)?\s(?P&lt;service&gt;.*(SMTP|smtp)\s.*)\r\n&quot;, data)): # SMTP Server
+            service = smtp.group(&quot;service&quot;).decode()
+            if smtp.group(&quot;hostname&quot;):
+                hostname = &quot;\tHostname: &quot; + smtp.group(&quot;hostname&quot;).decode()
+            else:
+                hostname = &quot;&quot;
+            return f&quot;{service}{hostname} (Confidence: 90%)&quot;
+        case _:
+            return</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Corey Basden, Isaiah Bessire, Patrick Maas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

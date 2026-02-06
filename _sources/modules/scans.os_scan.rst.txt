@@ -1,0 +1,21 @@
+scans.os\_scan package
+======================
+
+Submodules
+----------
+
+scans.os\_scan.os\_detection module
+-----------------------------------
+
+.. automodule:: scans.os_scan.os_detection
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: scans.os_scan
+   :members:
+   :show-inheritance:
+   :undoc-members:

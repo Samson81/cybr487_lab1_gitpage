@@ -1,0 +1,21 @@
+scans.cve\_scan package
+=======================
+
+Submodules
+----------
+
+scans.cve\_scan.cve\_search module
+----------------------------------
+
+.. automodule:: scans.cve_scan.cve_search
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: scans.cve_scan
+   :members:
+   :show-inheritance:
+   :undoc-members:

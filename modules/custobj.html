@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>custobj package &mdash; CYBR487 Lab1 2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=60dbed4a"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="custobj.tree package" href="custobj.tree.html" />
+    <link rel="prev" title="analyzer module" href="analyzer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CYBR487 Lab1
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Example Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Flags</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../flags.html">How To Use</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../help/scanning.html">Kinds of Scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Code Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">custobj package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="custobj.tree.html">custobj.tree package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-custobj.Address_Info">custobj.Address_Info module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custobj.Address_Info.Address_Info"><code class="docutils literal notranslate"><span class="pre">Address_Info</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-custobj.hop">custobj.hop module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custobj.hop.Hop"><code class="docutils literal notranslate"><span class="pre">Hop</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-custobj.port">custobj.port module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custobj.port.Port"><code class="docutils literal notranslate"><span class="pre">Port</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-custobj">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="parsing.html">parsing package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html">report package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scans.html">scans package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html">visualization package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CYBR487 Lab1</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Code Documentation</a></li>
+      <li class="breadcrumb-item active">custobj package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/custobj.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="custobj-package">
+<h1>custobj package<a class="headerlink" href="#custobj-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="custobj.tree.html">custobj.tree package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custobj.tree.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custobj.tree.html#module-custobj.tree.node">custobj.tree.node module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="custobj.tree.html#custobj.tree.node.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="custobj.tree.html#custobj.tree.node.Node.add_path"><code class="docutils literal notranslate"><span class="pre">Node.add_path()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="custobj.tree.html#module-custobj.tree.tracert_tree">custobj.tree.tracert_tree module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="custobj.tree.html#custobj.tree.tracert_tree.Tree"><code class="docutils literal notranslate"><span class="pre">Tree</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="custobj.tree.html#module-custobj.tree">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-custobj.Address_Info">
+<span id="custobj-address-info-module"></span><h2>custobj.Address_Info module<a class="headerlink" href="#module-custobj.Address_Info" title="Link to this heading"></a></h2>
+<p>The class for custom IP tracking data</p>
+<p>Tracks:
+- The IP address
+- The hops from that IP address
+- The open ports
+- The closed ports</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="custobj.Address_Info.Address_Info">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">custobj.Address_Info.</span></span><span class="sig-name descname"><span class="pre">Address_Info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ipaddr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/custobj/Address_Info.html#Address_Info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#custobj.Address_Info.Address_Info" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Class for tracking information about an IP address</p>
+<ul class="simple">
+<li><p>Hops from this IP</p></li>
+<li><p>Open ports</p></li>
+<li><p>Closed ports</p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="custobj.Address_Info.Address_Info.add_hop">
+<span class="sig-name descname"><span class="pre">add_hop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/custobj/Address_Info.html#Address_Info.add_hop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#custobj.Address_Info.Address_Info.add_hop" title="Link to this definition"></a></dt>
+<dd><p>Adds a hop with it’s round trip time to the list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hop</strong> (<em>str</em>) – The IP address of the hop</p></li>
+<li><p><strong>rtt</strong> (<em>float</em>) – The Round Trip time for the packet</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custobj.Address_Info.Address_Info.get_os_info">
+<span class="sig-name descname"><span class="pre">get_os_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/custobj/Address_Info.html#Address_Info.get_os_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#custobj.Address_Info.Address_Info.get_os_info" title="Link to this definition"></a></dt>
+<dd><p>Returns the detected OS and confidence
+:returns: (os_name, confidence)
+:rtype: tuple[str, int]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custobj.Address_Info.Address_Info.hops">
+<span class="sig-name descname"><span class="pre">hops</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#custobj.hop.Hop" title="custobj.hop.Hop"><span class="pre">Hop</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/custobj/Address_Info.html#Address_Info.hops"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#custobj.Address_Info.Address_Info.hops" title="Link to this definition"></a></dt>
+<dd><p>Returns the list of hops and round trip times</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of Hop objects</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>(list[<a class="reference internal" href="#custobj.hop.Hop" title="custobj.hop.Hop">Hop</a>])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custobj.Address_Info.Address_Info.ip">
+<span class="sig-name descname"><span class="pre">ip</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/custobj/Address_Info.html#Address_Info.ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#custobj.Address_Info.Address_Info.ip" title="Link to this definition"></a></dt>
+<dd><p>Returns the IP address that was passed in before.</p>
+<p>Use instead of the internal variable to prevent writing to it, the passed in
+IP should be considered final.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The IP address that was passed in</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custobj.Address_Info.Address_Info.scanned_port">
+<span class="sig-name descname"><span class="pre">scanned_port</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/custobj/Address_Info.html#Address_Info.scanned_port"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#custobj.Address_Info.Address_Info.scanned_port" title="Link to this definition"></a></dt>
+<dd><p>Appends to a list whether the scanned port was open or closed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>int</em>) – The port to append</p></li>
+<li><p><strong>open</strong> (<em>bool</em>) – Whether the port was open or closed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custobj.Address_Info.Address_Info.set_os_info">
+<span class="sig-name descname"><span class="pre">set_os_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">os_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/custobj/Address_Info.html#Address_Info.set_os_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#custobj.Address_Info.Address_Info.set_os_info" title="Link to this definition"></a></dt>
+<dd><p>Update OS detection info if confidence is higher
+:param os_name: Detected OS name
+:type os_name: str
+:param confidence: Confidence level (0-100)
+:type confidence: int</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-custobj.hop">
+<span id="custobj-hop-module"></span><h2>custobj.hop module<a class="headerlink" href="#module-custobj.hop" title="Link to this heading"></a></h2>
+<p>Custom object to hold hop data</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="custobj.hop.Hop">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">custobj.hop.</span></span><span class="sig-name descname"><span class="pre">Hop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/custobj/hop.html#Hop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#custobj.hop.Hop" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Hop object contains both the hop and it’s round trip time</p>
+</dd></dl>
+
+</section>
+<section id="module-custobj.port">
+<span id="custobj-port-module"></span><h2>custobj.port module<a class="headerlink" href="#module-custobj.port" title="Link to this heading"></a></h2>
+<p>A custom object to link the service and frequency from nmap-services to a port in a dictionary</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="custobj.port.Port">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">custobj.port.</span></span><span class="sig-name descname"><span class="pre">Port</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/custobj/port.html#Port"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#custobj.port.Port" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The class that links both the service and frequency of a port</p>
+</dd></dl>
+
+</section>
+<section id="module-custobj">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-custobj" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="analyzer.html" class="btn btn-neutral float-left" title="analyzer module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="custobj.tree.html" class="btn btn-neutral float-right" title="custobj.tree package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Corey Basden, Isaiah Bessire, Patrick Maas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

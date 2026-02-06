@@ -48,7 +48,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../usage.html">How To Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Example Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Flags</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../flags.html">How To Use</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Help</span></p>
 <ul>
@@ -58,16 +62,11 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Code Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="analyzer.html">analyzer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ip_parser.html">ip_parser module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="netscan.html">netscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custobj.html">custobj package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parsing.html">parsing package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="port_scanner.html">port_scanner module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="report.html">report module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scan.html">scan package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="selfscan.html">selfscan module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="threads.html">threads package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="traceroute.html">traceroute module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html">report package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scans.html">scans package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html">visualization package</a></li>
 </ul>
 </li>
 </ul>
@@ -104,13 +103,39 @@
 <li class="toctree-l2"><a class="reference internal" href="analyzer.html#analyzer.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="ip_parser.html">ip_parser module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ip_parser.html#ip_parser.normalize_cidr"><code class="docutils literal notranslate"><span class="pre">normalize_cidr()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="ip_parser.html#ip_parser.remove_ips"><code class="docutils literal notranslate"><span class="pre">remove_ips()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="custobj.html">custobj package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custobj.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="custobj.tree.html">custobj.tree package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="custobj.tree.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custobj.tree.html#module-custobj.tree.node">custobj.tree.node module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custobj.tree.html#module-custobj.tree.tracert_tree">custobj.tree.tracert_tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custobj.tree.html#module-custobj.tree">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="netscan.html">netscan module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="netscan.html#netscan.scan_network"><code class="docutils literal notranslate"><span class="pre">scan_network()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="custobj.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custobj.html#module-custobj.Address_Info">custobj.Address_Info module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info"><code class="docutils literal notranslate"><span class="pre">Address_Info</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info.add_hop"><code class="docutils literal notranslate"><span class="pre">Address_Info.add_hop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info.get_os_info"><code class="docutils literal notranslate"><span class="pre">Address_Info.get_os_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info.hops"><code class="docutils literal notranslate"><span class="pre">Address_Info.hops()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info.ip"><code class="docutils literal notranslate"><span class="pre">Address_Info.ip()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info.scanned_port"><code class="docutils literal notranslate"><span class="pre">Address_Info.scanned_port()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="custobj.html#custobj.Address_Info.Address_Info.set_os_info"><code class="docutils literal notranslate"><span class="pre">Address_Info.set_os_info()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="custobj.html#module-custobj.hop">custobj.hop module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="custobj.html#custobj.hop.Hop"><code class="docutils literal notranslate"><span class="pre">Hop</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="custobj.html#module-custobj.port">custobj.port module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="custobj.html#custobj.port.Port"><code class="docutils literal notranslate"><span class="pre">Port</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="custobj.html#module-custobj">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="parsing.html">parsing package</a><ul>
@@ -136,69 +161,97 @@
 <li class="toctree-l2"><a class="reference internal" href="parsing.html#module-parsing">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="port_scanner.html">port_scanner module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="port_scanner.html#port_scanner.scan_ports"><code class="docutils literal notranslate"><span class="pre">scan_ports()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="report.html">report package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="report.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html#module-report.all">report.all module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html#module-report.print_host">report.print_host module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="report.html#report.print_host.host_report"><code class="docutils literal notranslate"><span class="pre">host_report()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="report.html">report module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="report.html#report.netscan_report"><code class="docutils literal notranslate"><span class="pre">netscan_report()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="report.html#report.print_boxed_line"><code class="docutils literal notranslate"><span class="pre">print_boxed_line()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="report.html#report.selfscan_report"><code class="docutils literal notranslate"><span class="pre">selfscan_report()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html#module-report.print_os">report.print_os module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="report.html#report.print_os.os_report"><code class="docutils literal notranslate"><span class="pre">os_report()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="scan.html">scan package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scan.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="scan.plugins.html">scan.plugins package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="scan.plugins.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="scan.plugins.html#module-scan.plugins.arp">scan.plugins.arp module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="scan.plugins.html#module-scan.plugins.icmp">scan.plugins.icmp module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="scan.plugins.html#module-scan.plugins.nmap">scan.plugins.nmap module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="scan.plugins.html#module-scan.plugins.tcp">scan.plugins.tcp module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="scan.plugins.html#module-scan.plugins">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html#module-report.print_portscan">report.print_portscan module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="report.html#report.print_portscan.portscan_report"><code class="docutils literal notranslate"><span class="pre">portscan_report()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="report.html#module-report.print_selfscan">report.print_selfscan module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="report.html#report.print_selfscan.print_boxed_line"><code class="docutils literal notranslate"><span class="pre">print_boxed_line()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="report.html#report.print_selfscan.selfscan_report"><code class="docutils literal notranslate"><span class="pre">selfscan_report()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="report.html#module-report.print_traceroute">report.print_traceroute module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="report.html#report.print_traceroute.traceroute_report"><code class="docutils literal notranslate"><span class="pre">traceroute_report()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="report.html#module-report.report">report.report module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="report.html#report.report.netscan_report"><code class="docutils literal notranslate"><span class="pre">netscan_report()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="report.html#module-report">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scans.html">scans package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scans.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scans.cve_scan.html">scans.cve_scan package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scans.cve_scan.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.cve_scan.html#module-scans.cve_scan.cve_search">scans.cve_scan.cve_search module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.cve_scan.html#module-scans.cve_scan">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scans.os_scan.html">scans.os_scan package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scans.os_scan.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.os_scan.html#module-scans.os_scan.os_detection">scans.os_scan.os_detection module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.os_scan.html#module-scans.os_scan">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scans.port_scan.html">scans.port_scan package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scans.port_scan.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.port_scan.html#module-scans.port_scan.port_identify">scans.port_scan.port_identify module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.port_scan.html#module-scans.port_scan.port_scanner">scans.port_scan.port_scanner module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.port_scan.html#module-scans.port_scan.service_scan">scans.port_scan.service_scan module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.port_scan.html#module-scans.port_scan">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scans.self_scan.html">scans.self_scan package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scans.self_scan.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.self_scan.html#module-scans.self_scan.selfscan">scans.self_scan.selfscan module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.self_scan.html#module-scans.self_scan">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scans.traceroute_scan.html">scans.traceroute_scan package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scans.traceroute_scan.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.traceroute_scan.html#module-scans.traceroute_scan.traceroute">scans.traceroute_scan.traceroute module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.traceroute_scan.html#module-scans.traceroute_scan">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scans.up_scan.html">scans.up_scan package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scans.up_scan.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.up_scan.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.up_scan.html#module-scans.up_scan.ip_range_scan">scans.up_scan.ip_range_scan module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scans.up_scan.html#module-scans.up_scan">Module contents</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="scan.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scan.html#module-scan.ip_range_scan">scan.ip_range_scan module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="scan.html#scan.ip_range_scan.Scan"><code class="docutils literal notranslate"><span class="pre">Scan</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="scan.html#scan.ip_range_scan.Scan.scan"><code class="docutils literal notranslate"><span class="pre">Scan.scan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="scans.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scans.html#module-scans.netscan">scans.netscan module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scans.html#scans.netscan.scan_network"><code class="docutils literal notranslate"><span class="pre">scan_network()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="scans.html#module-scans">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="scan.html#module-scan">Module contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">visualization package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#module-visualization.visualizer">visualization.visualizer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="visualization.html#visualization.visualizer.visualizer"><code class="docutils literal notranslate"><span class="pre">visualizer()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="selfscan.html">selfscan module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="selfscan.html#selfscan.get_process_info"><code class="docutils literal notranslate"><span class="pre">get_process_info()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="selfscan.html#selfscan.get_sockets_in_proc"><code class="docutils literal notranslate"><span class="pre">get_sockets_in_proc()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="selfscan.html#selfscan.is_listening_socket"><code class="docutils literal notranslate"><span class="pre">is_listening_socket()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="selfscan.html#selfscan.scan_self"><code class="docutils literal notranslate"><span class="pre">scan_self()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#module-visualization">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="threads.html">threads package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="threads.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="threads.html#module-threads.CustomThread">threads.CustomThread module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="threads.html#threads.CustomThread.CustomThread"><code class="docutils literal notranslate"><span class="pre">CustomThread</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="threads.html#threads.CustomThread.CustomThread.run"><code class="docutils literal notranslate"><span class="pre">CustomThread.run()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="threads.html#threads.CustomThread.loading"><code class="docutils literal notranslate"><span class="pre">loading()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="threads.html#module-threads">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="traceroute.html">traceroute module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="traceroute.html#traceroute.icmp_traceroute"><code class="docutils literal notranslate"><span class="pre">icmp_traceroute()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="traceroute.html#traceroute.probe_hop_icmp"><code class="docutils literal notranslate"><span class="pre">probe_hop_icmp()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="traceroute.html#traceroute.probe_hop_tcp"><code class="docutils literal notranslate"><span class="pre">probe_hop_tcp()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="traceroute.html#traceroute.tcp_traceroute"><code class="docutils literal notranslate"><span class="pre">tcp_traceroute()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="traceroute.html#traceroute.traceroute"><code class="docutils literal notranslate"><span class="pre">traceroute()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
 </ul>
 </div>
 </section>

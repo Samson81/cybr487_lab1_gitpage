@@ -1,0 +1,21 @@
+scans.self\_scan package
+========================
+
+Submodules
+----------
+
+scans.self\_scan.selfscan module
+--------------------------------
+
+.. automodule:: scans.self_scan.selfscan
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: scans.self_scan
+   :members:
+   :show-inheritance:
+   :undoc-members:

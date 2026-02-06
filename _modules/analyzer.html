@@ -45,7 +45,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Usage</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../usage.html">How To Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Example Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Flags</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../flags.html">How To Use</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Help</span></p>
 <ul>
@@ -89,12 +93,20 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">netscan</span><span class="w"> </span><span class="kn">import</span> <span class="n">scan_network</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">selfscan</span><span class="w"> </span><span class="kn">import</span> <span class="n">scan_self</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">port_scanner</span><span class="w"> </span><span class="kn">import</span> <span class="n">scan_ports</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">report</span><span class="w"> </span><span class="kn">import</span> <span class="n">netscan_report</span><span class="p">,</span> <span class="n">selfscan_report</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">threads.CustomThread</span><span class="w"> </span><span class="kn">import</span> <span class="n">NOT_DONE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scans.netscan</span><span class="w"> </span><span class="kn">import</span> <span class="n">scan_network</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scans.up_scan.ip_range_scan</span><span class="w"> </span><span class="kn">import</span> <span class="n">Scan</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scans.self_scan.selfscan</span><span class="w"> </span><span class="kn">import</span> <span class="n">scan_self</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scans.port_scan.port_scanner</span><span class="w"> </span><span class="kn">import</span> <span class="n">scan_ports</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scans.port_scan.service_scan</span><span class="w"> </span><span class="kn">import</span> <span class="n">service_scan</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">report.report</span><span class="w"> </span><span class="kn">import</span> <span class="n">netscan_report</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">report.print_selfscan</span><span class="w"> </span><span class="kn">import</span> <span class="n">selfscan_report</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">custom.threads.CustomThread</span><span class="w"> </span><span class="kn">import</span> <span class="n">THREAD_DONE</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsing.port_parser</span><span class="w"> </span><span class="kn">import</span> <span class="n">Port_Parse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">visualization.visualizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">visualizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scans.os_scan.os_detection</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">detect_os_by_ttl</span><span class="p">,</span>
+                         <span class="n">detect_os_by_window</span><span class="p">,</span>
+                         <span class="n">detect_os_by_ttl_df</span><span class="p">,</span>
+                         <span class="n">detect_os_tcp_options</span><span class="p">)</span>
 
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../modules/analyzer.html#analyzer.main">[docs]</a>
@@ -105,11 +117,21 @@
 <span class="sd">        args (argparse.Namespace): The command-line arguments passed into main</span>
 <span class="sd">        parse (argparse.ArgumentParser): The command-line argument parser</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">selfscan</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">selfscan</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
     
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
+        <span class="n">list_scanner</span> <span class="o">=</span> <span class="n">Scan</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">list_scanner</span><span class="o">.</span><span class="n">list_plugins</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
     <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">service_scan</span><span class="p">:</span> <span class="c1"># Makes sure that the portscan runs if they chose a service scan      </span>
+            <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">portscan</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">args</span><span class="o">.</span><span class="n">portscan</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
         <span class="k">if</span> <span class="s2">&quot;all&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">top_ports</span><span class="p">:</span>
             <span class="n">args</span><span class="o">.</span><span class="n">top_ports</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">top_ports</span><span class="p">)</span>
             
@@ -124,19 +146,31 @@
             
             <span class="c1">#perform optional port scan</span>
             <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">portscan</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">portscan</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">portscan</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">top_ports</span><span class="p">:</span>
                     <span class="n">ports</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">port_parser</span> <span class="o">=</span> <span class="n">Port_Parse</span><span class="p">()</span>
                     <span class="n">ports</span> <span class="o">=</span> <span class="n">port_parser</span><span class="o">.</span><span class="n">port_parse</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">portscan</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">top_ports</span><span class="p">)</span>
-                    
+            
                 <span class="n">scan_ports</span><span class="p">(</span><span class="n">network_map</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="n">ports</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">service_scan</span><span class="p">:</span>
+                <span class="n">service_scan</span><span class="p">(</span><span class="n">network_map</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">service_scan_timeout</span><span class="p">)</span>
+                
+            <span class="c1">#perform optional os detection</span>
+            <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">os</span><span class="p">:</span>
+                <span class="n">detect_os_by_ttl</span><span class="p">(</span><span class="n">network_map</span><span class="p">)</span>
+                <span class="n">detect_os_by_window</span><span class="p">(</span><span class="n">network_map</span><span class="p">)</span>
+                <span class="n">detect_os_by_ttl_df</span><span class="p">(</span><span class="n">network_map</span><span class="p">)</span>
+                <span class="n">detect_os_tcp_options</span><span class="p">(</span><span class="n">network_map</span><span class="p">)</span>
                 
             <span class="c1">#report findings</span>
             <span class="n">netscan_report</span><span class="p">(</span><span class="n">network_map</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
             
-            <span class="c1">#perform optional network_map -&gt; DOT visualizer here</span>
-            <span class="c1">#visualize_network(network_map)</span>
+            <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">traceroute</span><span class="p">:</span> 
+                <span class="c1"># Only visualize if a traceroute was performed</span>
+                <span class="c1"># Otherwise you get a single 127.0.0.1 node in the graph</span>
+                <span class="n">visualizer</span><span class="p">(</span><span class="n">network_map</span><span class="p">)</span>
             
             <span class="c1">#quick visualization of network_map structure</span>
             <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
@@ -147,10 +181,20 @@
                     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Open Ports: </span><span class="si">{</span><span class="n">addr_info</span><span class="o">.</span><span class="n">oports</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Closed Ports: </span><span class="si">{</span><span class="n">addr_info</span><span class="o">.</span><span class="n">cports</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Hops: </span><span class="si">{</span><span class="n">addr_info</span><span class="o">.</span><span class="n">hops</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span> <span class="c1"># pickling the state after the run to look at later</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+                <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">-%H-%M-%S&quot;</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;output/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">debug.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+                    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">network_map</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>  
             
     <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Exiting program...&quot;</span><span class="p">)</span>
-        <span class="n">NOT_DONE</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+        <span class="n">THREAD_DONE</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="c1"># If any other exception occurs, make sure it ends the thread</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> 
+        <span class="n">THREAD_DONE</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
 
 
@@ -160,6 +204,8 @@
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;--ip&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The IP range to scan&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--protocol&#39;</span><span class="p">,</span>
     		<span class="n">help</span><span class="o">=</span><span class="s1">&#39;The type of scan to perform. Default &quot;arp&quot;&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-l&#39;</span><span class="p">,</span> <span class="s1">&#39;--list&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Lists the valid protocols to use, and exits.&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--selfscan&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
     		<span class="n">help</span><span class="o">=</span><span class="s2">&quot;Scans the user&#39;s /proc system&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;--timeout&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
@@ -174,9 +220,17 @@
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="s1">&#39;--inverted-match&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Takes in a file of IP addresses to NOT scan&#39;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="s1">&#39;--debug&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-    		<span class="n">help</span><span class="o">=</span><span class="s2">&quot;Show extra debug info&quot;</span><span class="p">)</span>
+    		<span class="n">help</span><span class="o">=</span><span class="s2">&quot;Show extra debug info, and creates a debug pickle&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--top-ports&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;10&quot;</span><span class="p">,</span> <span class="s2">&quot;25&quot;</span><span class="p">,</span> <span class="s2">&quot;100&quot;</span><span class="p">,</span> <span class="s2">&quot;1000&quot;</span><span class="p">],</span>
-            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Scan the top x ports on every machine. Options: all, 10, 25, 100, 10000&quot;</span><span class="p">)</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Scan the top x ports on every machine. Options: all, 10, 25, 100, 1000&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-sV&quot;</span><span class="p">,</span> <span class="s1">&#39;--service-scan&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Attempts to Identify the service running on each port&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-sVt&#39;</span><span class="p">,</span> <span class="s1">&#39;--service-scan-timeout&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+    		<span class="n">help</span><span class="o">=</span><span class="s1">&#39;The time in seconds to wait for a packet. Default 5 seconds&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;--cve&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Check found services for known vulnerabilities.&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--os&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Try to determine the OS of found hosts.&#39;</span><span class="p">)</span>
     
     <span class="c1">#send args to main</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
